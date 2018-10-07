@@ -17,13 +17,46 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['web']], function () {
 
-	Route::get('/', ['middleware' => 'auth',function(){
-    	$lectures = Lecture::all();
-    	return view('lectures', [
-    		'lectures' => $lectures
-    	]);
+	Route::get('/', 'PagesController@show')->middleware('auth');
+
+	Route::post('/lecture', ['middleware' => 'auth',function(Request $request) {
+
+		$lecture = new Lecture;
+		$lecture->title = $request->title;
+		$lecture->univ = $request->univ;
+		$lecture->gra = $request->gra;
+		$lecture->dep = $request->dep;
+		$lecture->number = $request->number;
+		$lecture->date = $request->date;
+		$lecture->user_id = "123456";
+		$lecture->save();
+
+		return redirect('/');
+
 	}]);
 
-	Route::auth();
+	// 学生が出席ボタンを押したとき
+	Route::post('/lecture/{lecture}', ['middleware' => 'auth',function(Request $request) {
+
+		return redirect('/');
+
+	}]);
+
+
+	// 教員が確認ボタンを押したとき
+	Route::get('/lecture/{lecture}', 'LectureController@show')->middleware('auth');
+
+
+	// 学生が削除ボタンを押したとき
+	Route::delete('/lecture/{lecture}', ['middleware' => 'auth',function(Request $request) {
+		$lecture->delete();
+		return redirect('/');
+
+	}]);
+
+
+	// すべての階層に共通する
+	// ページにリクエストがきたら認証させる
+	Auth::routes();
 
 });

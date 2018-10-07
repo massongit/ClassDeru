@@ -80,7 +80,7 @@
             @else
                 <!-- student_idが teacher かどうかで判別 -->
                 @if (Auth::user()->student_id != 'teacher')
-                    {{Auth::user()->student_id}}
+                    @yield('studentlec')
                 @else
                     @yield('content')   
                 @endif

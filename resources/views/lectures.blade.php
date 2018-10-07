@@ -58,7 +58,7 @@
 								<input type="text" name="date" id="date" class="form-control" value="{{ old('date') }}">
 							</div>
 							2018年10月7日9時30分から11時まで開講の場合、
-							201810010930201810071100 と入力してください.
+							201810070930201810071100 と入力してください.
 						</div>
 
 
@@ -92,6 +92,20 @@
 									<tr>
 										<td class="table-text"><div>{{ $lecture->title }}</div></td>
 
+										<!-- 人数 -->
+										<td>
+											{{ $lecture->number }}人
+										</td>
+
+										<!-- 出席者確認ボタン -->
+										<td>
+											<form action="/lecture/{{ $lecture->id}}" method="GET">
+												
+												<button type="submit" class="btn btn-info" value="{{Auth::user()->student_id}}">確認
+												</button>
+											</form>
+										</td>
+
 										<!-- 削除ボタン -->
 										<td>
 											<form action="/lecture/{{ $lecture->id }}" method="POST">
@@ -103,6 +117,7 @@
 												</button>
 											</form>
 										</td>
+
 									</tr>
 								@endforeach
 							</tbody>
@@ -112,6 +127,42 @@
 			@endif
 		</div>
 	</div>
+@endsection
+
+
+<!-- ログインしている学生側に表示する授業一覧 -->
+@section('studentlec')
+	@if (count($lectures) > 0)
+		<div class="panel panel-default">
+
+			<div class="panel-body">
+				<table class="table table-striped task-table">
+					<thead>
+						<th>現在開講している授業</th>
+						<th>&nbsp;</th>
+					</thead>
+					<tbody>
+						@foreach ($lectures as $lecture)
+							<tr>
+								<td class="table-text"><div>{{ $lecture->title }}</div></td>
+
+								<!-- 出席ボタン -->
+								<td>
+									<form action="/lecture/{{ $lecture->id }}" method="POST">
+										{{ csrf_field() }}
+
+										<button type="submit" class="btn btn-success" value="{{Auth::user()->student_id}}">
+											出席
+										</button>
+									</form>
+								</td>
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+	@endif
 @endsection
 
 
