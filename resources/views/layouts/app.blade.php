@@ -82,7 +82,7 @@
                 @if (Auth::user()->student_id != 'teacher')
                     {{Auth::user()->student_id}}
                 @else
-                    bbbb
+                    @yield('content')   
                 @endif
             @endif
         </main>

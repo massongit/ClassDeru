@@ -9,23 +9,60 @@
 				</div>
 
 				<div class="panel-body">
-					<!-- Display Validation Errors -->
+					<!-- エラーの確認 -->
 					@include('common.errors')
 
-					<!-- New Lecture Form -->
+					<!-- 新規授業登録フォーム -->
 					<form action="/lecture" method="POST" class="form-horizontal">
 						{{ csrf_field() }}
 
-						<!-- Lecture title -->
+						<!-- 追加する授業の情報 -->
 						<div class="form-group">
 							<label for="task-name" class="col-sm-3 control-label">授業名</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="title" id="lecture-title" class="form-control" value="{{ old('class') }}">
+								<input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}">
 							</div>
+
+
+							<label for="task-name" class="col-sm-3 control-label">開講する大学</label>
+
+							<div class="col-sm-6">
+								<input type="text" name="univ" id="univ" class="form-control" value="{{ old('univ') }}">
+							</div>
+
+
+							<label for="task-name" class="col-sm-3 control-label">開講する学部</label>
+
+							<div class="col-sm-6">
+								<input type="text" name="gra" id="gra" class="form-control" value="{{ old('gra') }}">
+							</div>
+
+							<label for="task-name" class="col-sm-3 control-label">開講する学科</label>
+
+							<div class="col-sm-6">
+								<input type="text" name="dep" id="dep" class="form-control" value="{{ old('dep') }}">
+							</div>
+
+
+							<label for="task-name" class="col-sm-3 control-label">全受講者数</label>
+
+							<div class="col-sm-6">
+								<input type="text" name="number" id="number" class="form-control" value="{{ old('number') }}">
+							</div>
+
+
+							<label for="task-name" class="col-sm-3 control-label">開講日時</label>
+
+							<div class="col-sm-6">
+								<input type="text" name="date" id="date" class="form-control" value="{{ old('date') }}">
+							</div>
+							2018年10月7日9時30分から11時まで開講の場合、
+							201810010930201810071100 と入力してください.
 						</div>
 
-						<!-- Add Lecture Button -->
+
+						<!-- 授業を追加 -->
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-6">
 								<button type="submit" class="btn btn-default">
@@ -37,7 +74,7 @@
 				</div>
 			</div>
 
-			<!-- Lectures -->
+			<!-- 授業一覧 -->
 			@if (count($lectures) > 0)
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -55,7 +92,7 @@
 									<tr>
 										<td class="table-text"><div>{{ $lecture->title }}</div></td>
 
-										<!-- Task Delete Button -->
+										<!-- 削除ボタン -->
 										<td>
 											<form action="/lecture/{{ $lecture->id }}" method="POST">
 												{{ csrf_field() }}
