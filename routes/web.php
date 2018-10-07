@@ -14,13 +14,16 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group(['middleware' => ['web']], function () {
 
-	Route::get('/', function () {
+	Route::get('/', ['middleware' => 'auth',function(){
     	$lectures = Lecture::all();
     	return view('lectures', [
     		'lectures' => $lectures
     	]);
-	});
+	}]);
+
+	Route::auth();
 
 });
