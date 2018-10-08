@@ -36,19 +36,15 @@ Route::group(['middleware' => ['web']], function () {
 	}]);
 
 	// 学生が出席ボタンを押したとき
-	Route::post('/lecture/{lecture}', ['middleware' => 'auth',function(Request $request) {
-
-		return redirect('/');
-
-	}]);
+	Route::post('/lecture/{lecture}', 'LectureController@clickUser')->middleware('auth');
 
 
 	// 教員が確認ボタンを押したとき
-	Route::get('/lecture/{lecture}', 'LectureController@show')->middleware('auth');
+	Route::get('/lecture/{lecture}', 'LectureController@showStudent')->middleware('auth');
 
 
 	// 学生が削除ボタンを押したとき
-	Route::delete('/lecture/{lecture}', ['middleware' => 'auth',function(Request $request) {
+	Route::delete('/lecture/{lecture}', ['middleware' => 'auth',function(Lecture $lecture) {
 		$lecture->delete();
 		return redirect('/');
 

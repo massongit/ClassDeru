@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+<!-- ログインしている教員側に表示する授業登録画面 -->
 @section('content')
 	<div class="container">
 		<div class="col-sm-offset-2 col-sm-8">
@@ -84,7 +85,8 @@
 					<div class="panel-body">
 						<table class="table table-striped task-table">
 							<thead>
-								<th>Lecture</th>
+								<th>授業名</th>
+								<th>全履修数</th>
 								<th>&nbsp;</th>
 							</thead>
 							<tbody>
@@ -130,6 +132,7 @@
 @endsection
 
 
+
 <!-- ログインしている学生側に表示する授業一覧 -->
 @section('studentlec')
 	@if (count($lectures) > 0)
@@ -151,7 +154,7 @@
 									<form action="/lecture/{{ $lecture->id }}" method="POST">
 										{{ csrf_field() }}
 
-										<button type="submit" class="btn btn-success" value="{{Auth::user()->student_id}}">
+										<button type="submit" class="btn btn-success" value="">
 											出席
 										</button>
 									</form>
