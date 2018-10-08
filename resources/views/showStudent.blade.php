@@ -27,6 +27,11 @@
      	}
      ?>
 
+    <br>
+    <br>
+    <a href="#", onclick="window.history.back(); return false;">
+    	戻る
+ 	</a>
 
 
 </body>

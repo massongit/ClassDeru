@@ -47,9 +47,8 @@ class LectureController extends Controller
     			'attendstudent' => $setpos
     		]);
 
-    	echo Lecture::where('id', $lecture)
-    		->value('attendstudent');
+    	//echo Lecture::where('id', $lecture)->value('attendstudent');
   
-    	//return redirect('/');
+    	return redirect('/');
     }
 }

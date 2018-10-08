@@ -86,7 +86,8 @@
 						<table class="table table-striped task-table">
 							<thead>
 								<th>授業名</th>
-								<th>全履修数</th>
+								<th>教員名</th>
+								<th>出席者数 / 全履修数</th>
 								<th>&nbsp;</th>
 							</thead>
 							<tbody>
@@ -94,14 +95,19 @@
 									<tr>
 										<td class="table-text"><div>{{ $lecture->title }}</div></td>
 
+										<!-- 教員名 -->
+										<td>
+
+										</td>
+
 										<!-- 人数 -->
 										<td>
-											{{ $lecture->number }}人
+											{{ $lecture->attendCount($lecture) }} / {{ $lecture->number }}
 										</td>
 
 										<!-- 出席者確認ボタン -->
 										<td>
-											<form action="/lecture/{{ $lecture->id}}" method="GET">
+											<form action="/lecture/{{ $lecture->id}}/kekka" method="GET">
 												
 												<button type="submit" class="btn btn-info" value="{{Auth::user()->student_id}}">確認
 												</button>

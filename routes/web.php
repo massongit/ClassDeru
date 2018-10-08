@@ -40,10 +40,10 @@ Route::group(['middleware' => ['web']], function () {
 
 
 	// 教員が確認ボタンを押したとき
-	Route::get('/lecture/{lecture}', 'LectureController@showStudent')->middleware('auth');
+	Route::get('/lecture/{lecture}/kekka', 'LectureController@showStudent')->middleware('auth');
 
 
-	// 学生が削除ボタンを押したとき
+	// 教員が削除ボタンを押したとき
 	Route::delete('/lecture/{lecture}', ['middleware' => 'auth',function(Lecture $lecture) {
 		$lecture->delete();
 		return redirect('/');

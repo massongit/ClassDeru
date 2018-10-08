@@ -7,7 +7,7 @@
     <!-- CSRF トークン -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>授業出席システム</title>
+    <title>授業出席システム ClassDeru</title>
 
     <!-- スクリプト -->
     <script src="{{ asset('js/app.js') }}" defer></script>
