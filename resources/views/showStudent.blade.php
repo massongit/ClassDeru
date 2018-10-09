@@ -1,8 +1,11 @@
+<!-- 教員が出席者を確認するときに表示するbladeファイル
+	 LectureControllerのshowStudent関数から呼ばれる
+ -->
 <!doctype html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>出席管理システム</title>
+    <title>出席管理システム ClassDeru</title>
 </head>
 <body>
     <h1>{{ $lectitle }} 出席者一覧</h1>
@@ -29,6 +32,7 @@
 
     <br>
     <br>
+
     <a href="#", onclick="window.history.back(); return false;">
     	戻る
  	</a>

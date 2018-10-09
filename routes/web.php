@@ -1,6 +1,7 @@
 <?php
 
 use App\Lecture;
+use App\User;
 use Illuminate\Http\Request;
 
 
@@ -19,6 +20,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/', 'PagesController@show')->middleware('auth');
 
+	// 教員が授業を追加
 	Route::post('/lecture', ['middleware' => 'auth',function(Request $request) {
 
 		$lecture = new Lecture;
@@ -28,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
 		$lecture->dep = $request->dep;
 		$lecture->number = $request->number;
 		$lecture->date = $request->date;
-		$lecture->user_id = "123456";
+		$lecture->user_id = $request->user()->id;
 		$lecture->save();
 
 		return redirect('/');

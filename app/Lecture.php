@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lecture extends Model
 {
+	public function user() {
+		return $this->belongsTo('App\User');
+	}
+
     protected $fillable = [
         'title', 'univ', 'gra', 'dep', 'number', 'date',
     ];
 
-    // 教員側の授業一覧に出席を押した学生の数を表示する
+    // 教員側の授業一覧に「出席」を押した学生の数を表示する
     public function attendCount($lec) {
     	$attendall =$lec['attendstudent'];
 
@@ -19,7 +23,6 @@ class Lecture extends Model
 
     	// 出席者数を取得
     	$num = (count($student)-1)/2;
-
     	return $num;
     }
 }

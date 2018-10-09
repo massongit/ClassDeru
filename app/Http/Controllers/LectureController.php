@@ -1,4 +1,6 @@
 <?php
+//	学生が出席ボタンを押したとき, 教員が確認ボタンを押したときに
+//	呼ばれるコントローラー
 
 namespace App\Http\Controllers;
 
@@ -10,9 +12,27 @@ use App\Lecture;
 
 class LectureController extends Controller
 {
-	// 教員が出席者数を確認
+	// 教員が授業を追加するとき
+	/*
+	public function addLecture($request) {
+		$lecture = new Lecture;
+		$lecture->title = $request->title;
+		$lecture->univ = $request->univ;
+		$lecture->gra = $request->gra;
+		$lecture->dep = $request->dep;
+		$lecture->number = $request->number;
+		$lecture->date = $request->date;
+		$lecture->user_id = $request->user()->id;
+		$lecture->save();
+
+		return redirect('/');
+	}
+	*/
+
+	// 教員が出席者を確認するとき
     public function showStudent($lecture) {
     	// Lectureモデルから$lecture(番号)のlectureを検索して取得
+    	// 出席した学生一覧
     	$attendall = Lecture::where('id', $lecture)
     		->value('attendstudent');
 
@@ -24,6 +44,7 @@ class LectureController extends Controller
     	$lecnum = Lecture::where('id', $lecture)
     		->value('number');
 
+    	// showStudentを表示
     	return view('showStudent', ['attendall' => $attendall,
     								'lectitle' => $lectitle,
     								'lecnum' => $lecnum,
@@ -38,6 +59,7 @@ class LectureController extends Controller
     	$setpos = Lecture::where('id', $lecture)
     		->value('attendstudent');
 
+    	// ,名前,学生番号,名前,学生番号... の順に格納していく
     	$setpos = $setpos.",".$user->name;
     	$setpos = $setpos.",".$user->student_id;
 
@@ -47,8 +69,6 @@ class LectureController extends Controller
     			'attendstudent' => $setpos
     		]);
 
-    	//echo Lecture::where('id', $lecture)->value('attendstudent');
-  
     	return redirect('/');
     }
 }
