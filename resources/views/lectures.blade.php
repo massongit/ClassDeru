@@ -22,34 +22,33 @@
 							<label for="task-name" class="col-sm-3 control-label">授業名</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}">
+								<input type="text" name="title" placeholder="(例) 基礎プログラミング演習"id="title" class="form-control" value="{{ old('title') }}">
 							</div>
 
 
 							<label for="task-name" class="col-sm-3 control-label">開講する大学</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="univ" id="univ" class="form-control" value="{{ old('univ') }}">
+								<input type="text" name="univ" placeholder="(例) 京都産業" id="univ" class="form-control" value="{{ old('univ') }}">
 							</div>
-
 
 							<label for="task-name" class="col-sm-3 control-label">開講する学部</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="gra" id="gra" class="form-control" value="{{ old('gra') }}">
+								<input type="text" name="gra" id="gra" class="form-control" placeholder="(例) 情報理工"value="{{ old('gra') }}">
 							</div>
 
 							<label for="task-name" class="col-sm-3 control-label">開講する学科</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="dep" id="dep" class="form-control" value="{{ old('dep') }}">
+								<input type="text" name="dep" id="dep" class="form-control" placeholder="(例) ネットワークメディア" value="{{ old('dep') }}">
 							</div>
 
 
 							<label for="task-name" class="col-sm-3 control-label">全受講者数</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="number" id="number" class="form-control" value="{{ old('number') }}">
+								<input type="text" name="number" placeholder="(例) 100" id="number" class="form-control" value="{{ old('number') }}">
 							</div>
 
 
@@ -160,7 +159,7 @@
 									<form action="/lecture/{{ $lecture->id }}" method="POST">
 										{{ csrf_field() }}
 
-										<button type="submit" class="btn btn-success" value="">
+										<button type="submit" class="btn btn-success"　value="">
 											出席
 										</button>
 									</form>
