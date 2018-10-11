@@ -134,7 +134,7 @@
 
 <!-- ログインしている学生側に表示する授業一覧 -->
 @section('studentlec')
-	@if (count($lectures) > 0)
+	@if (count($lectures)>0 and count($lecTeachers)>0)
 		<div class="panel panel-default">
 
 			<div class="panel-body">
@@ -149,6 +149,7 @@
 							<tr>
 								<td class="table-text"><div>{{ $lecture->title }}</div></td>
 
+								<!-- 授業の教員名を表示 -->
 								<td>
 									{{ $t }}
 								</td>
