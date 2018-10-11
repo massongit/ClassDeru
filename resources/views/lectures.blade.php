@@ -22,7 +22,7 @@
 							<label for="task-name" class="col-sm-3 control-label">授業名</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="title" placeholder="(例) 基礎プログラミング演習"id="title" class="form-control" value="{{ old('title') }}">
+								<input type="text" name="title" placeholder="(例) 心理学の世界"id="title" class="form-control" value="{{ old('title') }}">
 							</div>
 
 
@@ -41,7 +41,7 @@
 							<label for="task-name" class="col-sm-3 control-label">開講する学科</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="dep" id="dep" class="form-control" placeholder="(例) ネットワークメディア" value="{{ old('dep') }}">
+								<input type="text" name="dep" id="dep" class="form-control" placeholder="(例) ネットワーク" value="{{ old('dep') }}">
 							</div>
 
 
@@ -85,7 +85,6 @@
 						<table class="table table-striped task-table">
 							<thead>
 								<th>授業名</th>
-								<th>教員名</th>
 								<th>出席者数 / 全履修数</th>
 								<th>&nbsp;</th>
 							</thead>
@@ -93,11 +92,6 @@
 								@foreach ($lectures as $lecture)
 									<tr>
 										<td class="table-text"><div>{{ $lecture->title }}</div></td>
-
-										<!-- 教員名 -->
-										<td>
-
-										</td>
 
 										<!-- 人数 -->
 										<td>
@@ -120,7 +114,7 @@
 												{{ method_field('DELETE') }}
 
 												<button type="submit" class="btn btn-danger">
-													<i class="fa fa-trash"></i>削除
+													削除
 												</button>
 											</form>
 										</td>
@@ -147,12 +141,17 @@
 				<table class="table table-striped task-table">
 					<thead>
 						<th>現在開講している授業</th>
+						<th>教員名</th>
 						<th>&nbsp;</th>
 					</thead>
 					<tbody>
-						@foreach ($lectures as $lecture)
+						@foreach (array_map(null, $lectures, $lecTeachers) as [$lecture, $t])
 							<tr>
 								<td class="table-text"><div>{{ $lecture->title }}</div></td>
+
+								<td>
+									{{ $t }}
+								</td>
 
 								<!-- 出席ボタン -->
 								<td>

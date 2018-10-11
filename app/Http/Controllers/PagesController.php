@@ -13,6 +13,7 @@ class PagesController extends Controller
 	// トップページにアクセスしたとき
     public function show() {
     	$user = Auth::user();	// ログインしているユーザを取得
+    	$lecTeachers = [];
 
 		// 教員が持っている授業 と 学生が出席できる授業 の表示
 		if($user->student_id == 'teacher'){
@@ -25,12 +26,16 @@ class PagesController extends Controller
 			foreach($all as $a){
 				if($a->univ == $user->univ){
 					array_push($lectures, $a);
+					// 授業の教員名を取得
+					$name = User::where('id', $a->user_id)->value('name');
+					array_push($lecTeachers, $name);
 				}
 			}
 		}
 
 		return view('lectures', [
 			'lectures' => $lectures,
+			'lecTeachers' => $lecTeachers,
 		]);
     }
 }
