@@ -4,7 +4,6 @@ use App\Lecture;
 use App\User;
 use Illuminate\Http\Request;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
