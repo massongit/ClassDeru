@@ -44,11 +44,16 @@ class LectureController extends Controller
     	$lecnum = Lecture::where('id', $lecture)
     		->value('number');
 
-    	// showStudentを表示
-    	return view('showStudent', ['attendall' => $attendall,
-    								'lectitle' => $lectitle,
-    								'lecnum' => $lecnum,
-    								]);
+    	// ユーザーが教員のときのみ, 出席管理画面にアクセスできる
+    	if(Auth::user()->student_id == 'teacher'){
+    		// showStudentを表示
+	    	return view('showStudent', ['attendall' => $attendall,
+									'lectitle' => $lectitle,
+									'lecnum' => $lecnum,
+									]);
+    	}else{
+    		return redirect('/');
+    	}
     }
 
     // 学生が出席をクリックしたとき
