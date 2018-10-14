@@ -65,8 +65,8 @@ class LectureController extends Controller
     		->value('attendstudent');
 
     	// ,名前,学生番号,名前,学生番号... の順に格納していく
-    	$setpos = $setpos.",".$user->name;
     	$setpos = $setpos.",".$user->student_id;
+    	$setpos = $setpos.",".$user->name;
 
     	// 取得したlectureのattendstudentにuserのnameとstudent_idを格納
     	Lecture::where('id', $lecture)
