@@ -79,16 +79,30 @@
 
         <main class="py-4">
         	<center>
-	        	<h1>{{ $lectitle }} 出席者一覧</h1>
-
+        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	        	<h1 style="display:inline">{{ $lectitle }} 出席者一覧</h1>
+	        	&emsp;&emsp;
+	        	<a href="#", onclick="window.history.back(); return false;">
+			    	CSVダウンロード
+			 	</a>
+			 	&emsp;
 			    <a href="#", onclick="window.history.back(); return false;">
 			    	戻る
 			 	</a>
 
 	        	<br>
 	        	<br>
+	        	<br>
 
-	        	<h2>
+	        	<h3>
+	        		<?php
+	        			// 現在時刻を表示させる
+	        			$data = new DateTime("now",new DateTimeZone('Asia/Tokyo'));
+	        			echo $data->format('m月d日 H時i分');
+	        		?>
+	        	</h3>
+
+	        	<h2><font color="blue">
 				    <?php
 				    	// 出席した学生を , で分割
 				    	$student = explode(",", $attendall);
@@ -97,7 +111,7 @@
 				    	$num = (count($student)-1)/2;
 				    	echo $num." / ".$lecnum." 人"."<br>";
 				    ?>
-				</h2>
+				</font></h2>
 
 			    <B>
 			    <?php
