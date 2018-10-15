@@ -82,7 +82,7 @@
         		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 	        	<h1 style="display:inline">{{ $lectitle }} 出席者一覧</h1>
 	        	&emsp;&emsp;
-	        	<a href="#", onclick="window.history.back(); return false;">
+	        	<a href="#">
 			    	CSVダウンロード
 			 	</a>
 			 	&emsp;
@@ -112,6 +112,8 @@
 				    	echo $num." / ".$lecnum." 人"."<br>";
 				    ?>
 				</font></h2>
+
+				<hr size="5" width="50%" color="green">
 
 			    <B>
 			    <?php

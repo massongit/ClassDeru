@@ -20,7 +20,7 @@ class CreateLecturesTable extends Migration
             $table->string('gra');      // 開講学部
             $table->string('dep');      // 開講学科
             $table->string('number');   // 履修者数
-            $table->string('date');     // 2018100609300945 2018年10月6日 9:30~9:45まで
+            $table->string('date');     // 連絡事項として使用
             $table->unsignedInteger('user_id');
             $table->timestamps();
         });

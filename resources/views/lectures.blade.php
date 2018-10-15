@@ -22,7 +22,7 @@
 							<label for="task-name" class="col-sm-3 control-label">授業名</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="title" placeholder="(例) 数学解析"id="title" class="form-control" value="{{ old('title') }}">
+								<input type="text" name="title" placeholder="(例) 数学解析" id="title" class="form-control" value="{{ old('title') }}">
 							</div>
 
 
@@ -52,7 +52,7 @@
 							</div>
 
 
-							<label for="task-name" class="col-sm-3 control-label">開講日時</label>
+							<label for="task-name" class="col-sm-3 control-label">連絡事項</label>
 
 							<div class="col-sm-6">
 								<input type="text" name="date" id="date" class="form-control" value="{{ old('date') }}">
@@ -84,6 +84,7 @@
 							<thead>
 								<th>授業名</th>
 								<th>出席者数 / 全履修数</th>
+								<th>連絡事項</th>
 								<th>&nbsp;</th>
 							</thead>
 							<tbody>
@@ -94,6 +95,11 @@
 										<!-- 人数 -->
 										<td>
 											{{ $lecture->attendCount($lecture) }} / {{ $lecture->number }}
+										</td>
+
+										<!-- 連絡事項を表示 -->
+										<td>
+											{{ $lecture->date }}
 										</td>
 
 										<!-- 出席者確認ボタン -->
@@ -140,6 +146,7 @@
 					<thead>
 						<th>現在開講している授業</th>
 						<th>教員名</th>
+						<th>連絡事項</th>
 						<th>&nbsp;</th>
 					</thead>
 					<tbody>
@@ -152,9 +159,14 @@
 									{{ $t }}
 								</td>
 
+								<!-- 連絡事項 -->
+								<td>
+									{{ $lecture->date }}
+								</td>
+
 								<!-- 出席ボタン -->
 								<td>
-									<form action="/lecture/{{ $lecture->id }}" method="POST">
+									<form action="/lecture/{{ $lecture->id }}/$userpass" method="POST">
 										{{ csrf_field() }}
 
 										<button type="submit" class="btn btn-success"　value="">

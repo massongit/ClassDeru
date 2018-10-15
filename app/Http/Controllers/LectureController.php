@@ -57,14 +57,14 @@ class LectureController extends Controller
     }
 
     // 学生が出席をクリックしたとき
-    public function clickUser($lecture) {
+    public function clickUser(Request $request, $lecture) {
     	$user = Auth::user();
 
     	// Lectureモデルから$lecture(番号)のlectureを検索して取得
     	$setpos = Lecture::where('id', $lecture)
     		->value('attendstudent');
 
-    	// ,名前,学生番号,名前,学生番号... の順に格納していく
+		// ,名前,学生番号,名前,学生番号... の順に格納していく
     	$setpos = $setpos.",".$user->student_id;
     	$setpos = $setpos.",".$user->name;
 

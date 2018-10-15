@@ -37,7 +37,7 @@ Route::group(['middleware' => ['web']], function () {
 	}]);
 
 	// 学生が出席ボタンを押したとき
-	Route::post('/lecture/{lecture}', 'LectureController@clickUser')->middleware('auth');
+	Route::post('/lecture/{lecture}/{userpass}', 'LectureController@clickUser')->middleware('auth');
 
 
 	// 教員が確認ボタンを押したとき
