@@ -80,14 +80,15 @@
         <main class="py-4">
         	<center>
         		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	        	<h1 style="display:inline">{{ $lectitle }} 出席者一覧</h1>
+	        	<h1>{{ $lectitle }} 出席者一覧</h1>
+
 	        	&emsp;&emsp;
 	        	<a href="#">
 			    	CSVダウンロード
 			 	</a>
-			 	&emsp;
-			    <a href="#", onclick="window.history.back(); return false;">
-			    	戻る
+			 	&emsp;&emsp;&emsp;&emsp;
+			    <a href="#">
+			    	txtダウンロード
 			 	</a>
 
 	        	<br>

@@ -63,8 +63,8 @@
 						<!-- 授業を追加 -->
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-6">
-								<button type="submit" class="btn btn-default">
-									<i class="fa fa-plus"></i>授業を追加する
+								<button type="submit" class="btn btn-success">
+									授業を追加する
 								</button>
 							</div>
 						</div>
@@ -85,6 +85,7 @@
 								<th>授業名</th>
 								<th>出席者数 / 全履修数</th>
 								<th>連絡事項</th>
+								<th>&nbsp;</th>
 								<th>&nbsp;</th>
 							</thead>
 							<tbody>
