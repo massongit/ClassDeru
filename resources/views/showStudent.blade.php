@@ -83,9 +83,12 @@
 	        	<h1>{{ $lectitle }} 出席者一覧</h1>
 
 	        	&emsp;&emsp;
-	        	<a href="#">
-			    	CSVダウンロード
-			 	</a>
+
+                <form action="/lecture/{{ $lecture }}/csvdownload" method="GET">
+                    <a href="/lecture/{{ $lecture }}/csvdownload">
+                        CSVダウンロード
+                    </a>
+                </form>
 			 	&emsp;&emsp;&emsp;&emsp;
 			    <a href="#">
 			    	txtダウンロード

@@ -48,8 +48,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::delete('/lecture/{lecture}', ['middleware' => 'auth',function(Lecture $lecture) {
 		$lecture->delete();
 		return redirect('/');
-
 	}]);
+
+	// 教員が CSVダウンロード を押したとき
+	Route::get('/lecture/{lecture}/csvdownload',
+				'LectureController@downloadCSV')->middleware('auth');
 
 
 	// すべての階層に共通する

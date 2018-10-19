@@ -8,26 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Lecture;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
 class LectureController extends Controller
 {
-	// 教員が授業を追加するとき
-	/*
-	public function addLecture($request) {
-		$lecture = new Lecture;
-		$lecture->title = $request->title;
-		$lecture->univ = $request->univ;
-		$lecture->gra = $request->gra;
-		$lecture->dep = $request->dep;
-		$lecture->number = $request->number;
-		$lecture->date = $request->date;
-		$lecture->user_id = $request->user()->id;
-		$lecture->save();
-
-		return redirect('/');
-	}
-	*/
 
 	// 教員が出席者を確認するとき
     public function showStudent($lecture) {
@@ -50,10 +35,48 @@ class LectureController extends Controller
 	    	return view('showStudent', ['attendall' => $attendall,
 									'lectitle' => $lectitle,
 									'lecnum' => $lecnum,
+                                    'lecture' => $lecture,
 									]);
     	}else{
     		return redirect('/');
     	}
+    }
+
+    // 教員が出席者データをcsvでダウンロードするとき
+    public function downloadCSV($lecture) {
+        $attendall = Lecture::where('id', $lecture)
+            ->value('attendstudent');
+        $cnt = 1;
+        $student = explode(",", $attendall);
+
+        $headers = array(
+          "Content-type" => "text/csv",
+          "Content-Disposition" => "attachment; filename=student.csv",
+          "Pragma" => "no-cache",
+          "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+          "Expires" => "0"
+        );
+
+        $callback = function() {
+            $handle = fopen('php://output', 'w');
+
+            $columns = [
+                '学生番号',
+                '名前',
+              ] ;
+            mb_convert_variables('SJIS-win', 'UTF-8', $columns);
+
+            fputcsv($handle, $columns);
+
+            $csv = [$attendall];
+
+            mb_convert_variables('SJIS-win', 'UTF-8', $csv);
+            fputcsv($handle, $csv);
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
     // 学生が出席をクリックしたとき
