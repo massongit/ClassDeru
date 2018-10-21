@@ -14,7 +14,6 @@ use Carbon\Carbon;
 
 class LectureController extends Controller
 {
-
 	// 教員が出席者を確認するとき
     public function showStudent($lecture) {
     	// Lectureモデルから$lecture(番号)のlectureを検索して取得
