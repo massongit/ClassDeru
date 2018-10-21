@@ -90,9 +90,11 @@
                     </a>
                 </form>
 			 	&emsp;&emsp;&emsp;&emsp;
-			    <a href="#">
-			    	txtダウンロード
-			 	</a>
+                <form action="/lecture/{{ $lecture }}/txtdownload" method="GET">
+                    <a href="/lecture/{{ $lecture }}/txtdownload">
+                        txtダウンロード
+                    </a>
+                </form>
 
 	        	<br>
 	        	<br>

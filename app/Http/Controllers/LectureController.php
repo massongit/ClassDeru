@@ -44,39 +44,82 @@ class LectureController extends Controller
 
     // 教員が出席者データをcsvでダウンロードするとき
     public function downloadCSV($lecture) {
+
         $attendall = Lecture::where('id', $lecture)
             ->value('attendstudent');
-        $cnt = 1;
-        $student = explode(",", $attendall);
+        $title = Lecture::where('id', $lecture)
+            ->value('title');
 
-        $headers = array(
-          "Content-type" => "text/csv",
-          "Content-Disposition" => "attachment; filename=student.csv",
-          "Pragma" => "no-cache",
-          "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
-          "Expires" => "0"
-        );
+        $students = explode(",", $attendall);
+        # 先頭を1つ取り除く
+        array_shift($students);
+        # 文字コード変換
+        mb_convert_variables('SJIS-win', 'UTF-8', $students); 
+          
+        header('Content-Type: application/octet-stream');
+        header("Content-Disposition: attachment; filename={$title}_出席者.csv");
 
-        $callback = function() {
-            $handle = fopen('php://output', 'w');
+        $stream = fopen('php://output', 'w');
 
-            $columns = [
-                '学生番号',
-                '名前',
-              ] ;
-            mb_convert_variables('SJIS-win', 'UTF-8', $columns);
+        $cnt = 0;
+        while(count($students) > 0){
 
-            fputcsv($handle, $columns);
+            // タイトル付与
+            if($cnt == 0){
+                $title = $title." 出席者一覧";
+                mb_convert_variables('SJIS-win', 'UTF-8', $title);
+                $data = [$title];
+                fputcsv($stream, $data);
+                // 改行させる
+                $data = [""];
+                fputcsv($stream, $data);
+                $cnt += 1;
+            }else{
+                $data = [$cnt, array_shift($students), array_shift($students)];
+                fputcsv($stream,$data);
+                $cnt += 1;
+            }
+        }
+    }
 
-            $csv = [$attendall];
+    // 教員が出席者データをtxtでダウンロードするとき
+    public function downloadTxt($lecture) {
 
-            mb_convert_variables('SJIS-win', 'UTF-8', $csv);
-            fputcsv($handle, $csv);
+        $attendall = Lecture::where('id', $lecture)
+            ->value('attendstudent');
+        $title = Lecture::where('id', $lecture)
+            ->value('title');
 
-            fclose($handle);
-        };
+        $students = explode(",", $attendall);
+        # 先頭を1つ取り除く
+        array_shift($students);
+        # 文字コード変換
+        mb_convert_variables('SJIS-win', 'UTF-8', $students); 
+        $title = $title." 出席者一覧";
+        mb_convert_variables('SJIS-win', 'UTF-8', $title);
+          
+        header('Content-Type: application/octet-stream');
+        header("Content-Disposition: attachment; filename={$title}_出席者");
 
-        return response()->stream($callback, 200, $headers);
+        $stream = fopen('php://output', 'w');
+
+        $cnt = 0;
+        while(count($students) > 0){
+
+            // タイトル付与
+            if($cnt == 0){
+                $data = [$title];
+                fputcsv($stream, $data);
+                // 改行させる
+                $data = [""];
+                fputcsv($stream, $data);
+                $cnt += 1;
+            }else{
+                $data = [$cnt, array_shift($students), array_shift($students)];
+                fputcsv($stream,$data);
+                $cnt += 1;
+            }
+        }
     }
 
     // 学生が出席をクリックしたとき

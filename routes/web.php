@@ -54,6 +54,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/lecture/{lecture}/csvdownload',
 				'LectureController@downloadCSV')->middleware('auth');
 
+	// 教員が txtダウンロード を押したとき
+	Route::get('/lecture/{lecture}/txtdownload',
+				'LectureController@downloadTxt')->middleware('auth');
+
 
 	// すべての階層に共通する
 	// ページにリクエストがきたら認証させる

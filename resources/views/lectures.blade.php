@@ -75,9 +75,7 @@
 			<!-- 授業一覧 -->
 			@if (count($lectures) > 0)
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						授業一覧
-					</div>
+					<br>
 
 					<div class="panel-body">
 						<table class="table table-striped task-table">
