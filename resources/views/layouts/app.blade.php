@@ -10,7 +10,8 @@
     <title>授業出席システム ClassDeru</title>
 
     <!-- スクリプト -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer>
+    </script>
 
     <!-- フォント -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">

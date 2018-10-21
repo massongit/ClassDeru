@@ -6,7 +6,7 @@
 		<div class="col-sm-offset-2 col-sm-8">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					新規授業
+					<B>新規授業</B>
 				</div>
 
 				<div class="panel-body">
@@ -165,10 +165,10 @@
 
 								<!-- 出席ボタン -->
 								<td>
-									<form action="/lecture/{{ $lecture->id }}/$userpass" method="POST">
+									<form action="/lecture/{{ $lecture->id }}/$userpass" method="POST" onSubmit="attention()">
 										{{ csrf_field() }}
 
-										<button type="submit" class="btn btn-success"　value="">
+										<button type="submit" class="btn btn-success"　value="" onclick="this.disabled = true;">
 											出席
 										</button>
 									</form>
