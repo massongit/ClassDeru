@@ -52,7 +52,7 @@
 							</div>
 
 
-							<label for="task-name" class="col-sm-3 control-label">連絡事項</label>
+							<label for="task-name" class="col-sm-3 control-label">教室・連絡</label>
 
 							<div class="col-sm-6">
 								<input type="text" name="date" id="date" class="form-control" value="{{ old('date') }}">
@@ -82,7 +82,7 @@
 							<thead>
 								<th>授業名</th>
 								<th>出席者数 / 全履修数</th>
-								<th>連絡事項</th>
+								<th>教室・連絡</th>
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
 							</thead>
@@ -145,7 +145,7 @@
 					<thead>
 						<th>現在開講している授業</th>
 						<th>教員名</th>
-						<th>連絡事項</th>
+						<th>教室・連絡事項</th>
 						<th>&nbsp;</th>
 					</thead>
 					<tbody>
@@ -158,7 +158,7 @@
 									{{ $t }}
 								</td>
 
-								<!-- 連絡事項 -->
+								<!-- 教室・連絡事項 -->
 								<td>
 									{{ $lecture->date }}
 								</td>
