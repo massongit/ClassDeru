@@ -15,7 +15,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">氏名</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="(例) 鈴木一郎"name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -53,6 +53,7 @@
                                     </span>
                                 @endif
                             </div>
+                            大学
                         </div>
 
                         <div class="form-group row">
@@ -67,6 +68,7 @@
                                     </span>
                                 @endif
                             </div>
+                            学部
                         </div>
 
                         <div class="form-group row">
@@ -81,6 +83,7 @@
                                     </span>
                                 @endif
                             </div>
+                            学科
                         </div>
 
                         <div class="form-group row">
