@@ -160,6 +160,6 @@ class LectureController extends Controller
     			'attendstudent' => $setpos
     		]);
 
-    	return redirect('/');
+        return redirect('/')->with('my_status', __('出席完了'));
     }
 }
