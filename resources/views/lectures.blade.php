@@ -168,7 +168,7 @@
 									<form action="/lecture/{{ $lecture->id }}/$userpass" method="POST" onSubmit="attention()">
 										{{ csrf_field() }}
 
-										<button type="submit" class="btn btn-success"　value="" onclick="this.disabled = true;">
+										<button type="submit" class="btn btn-success"　value="">
 											出席
 										</button>
 									</form>
