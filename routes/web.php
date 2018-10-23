@@ -17,10 +17,14 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['web']], function () {
 
-	Route::get('/', 'PagesController@show')->middleware('auth');
+	Route::get('/', function () {
+		return view('top');
+	});
+
+	Route::get('/user', 'PagesController@show')->middleware('auth');
 
 	// 教員が授業を追加
-	Route::post('/lecture', ['middleware' => 'auth',function(Request $request) {
+	Route::post('/user/lecture', ['middleware' => 'auth',function(Request $request) {
 
 		$lecture = new Lecture;
 		$lecture->title = $request->title;
@@ -37,25 +41,25 @@ Route::group(['middleware' => ['web']], function () {
 	}]);
 
 	// 学生が出席ボタンを押したとき
-	Route::post('/lecture/{lecture}/{userpass}', 'LectureController@clickUser')->middleware('auth');
+	Route::post('/user/lecture/{lecture}/{userpass}', 'LectureController@clickUser')->middleware('auth');
 
 
 	// 教員が確認ボタンを押したとき
-	Route::get('/lecture/{lecture}/kekka', 'LectureController@showStudent')->middleware('auth');
+	Route::get('/user/lecture/{lecture}/kekka', 'LectureController@showStudent')->middleware('auth');
 
 
 	// 教員が削除ボタンを押したとき
-	Route::delete('/lecture/{lecture}', ['middleware' => 'auth',function(Lecture $lecture) {
+	Route::delete('/user/lecture/{lecture}', ['middleware' => 'auth',function(Lecture $lecture) {
 		$lecture->delete();
 		return redirect('/');
 	}]);
 
 	// 教員が CSVダウンロード を押したとき
-	Route::get('/lecture/{lecture}/csvdownload',
+	Route::get('/user/lecture/{lecture}/csvdownload',
 				'LectureController@downloadCSV')->middleware('auth');
 
 	// 教員が txtダウンロード を押したとき
-	Route::get('/lecture/{lecture}/txtdownload',
+	Route::get('/user/lecture/{lecture}/txtdownload',
 				'LectureController@downloadTxt')->middleware('auth');
 
 
