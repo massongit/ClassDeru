@@ -50,8 +50,9 @@ class LectureController extends Controller
     public function downloadCSV($lecture) {
 
         // 出席者を取得
-        $attendall = Lecture::where('id', $lecture)
-            ->value('attendstudent');
+        $attendallname = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sname');
+        $attendallid = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sid');
+
         // 授業名を取得
         $title = Lecture::where('id', $lecture)
             ->value('title');
@@ -60,42 +61,36 @@ class LectureController extends Controller
         $time = new Carbon();
         $time->setTimezone('Asia/Tokyo');
 
-        $students = explode(",", $attendall);
-        # 先頭を1つ取り除く
-        array_shift($students);
         # 文字コード変換
-        mb_convert_variables('SJIS-win', 'UTF-8', $students); 
+        mb_convert_variables('SJIS-win', 'UTF-8', $attendallname); 
+        mb_convert_variables('SJIS-win', 'UTF-8', $attendallid); 
           
         header('Content-Type: application/octet-stream');
         header("Content-Disposition: attachment; filename={$title}_出席者.csv");
 
         $stream = fopen('php://output', 'w');
 
-        $cnt = 0;
-        while(count($students) > 0){
+        // タイトル付与
+        $t1 = $time->year;
+        $t2 = $time->month;
+        $t3 = $time->day;
+        $t4 = $time->hour;
+        $t5 = $time->minute;
+        $now = $t1."年".$t2."月".$t3."日".$t4."時".$t5."分";
 
-            // タイトル付与
-            if($cnt == 0){
-                $t1 = $time->year;
-                $t2 = $time->month;
-                $t3 = $time->day;
-                $t4 = $time->hour;
-                $t5 = $time->minute;
-                $now = $t1."年".$t2."月".$t3."日".$t4."時".$t5."分";
+        mb_convert_variables('SJIS-win', 'UTF-8', $title);
+        mb_convert_variables('SJIS-win', 'UTF-8', $now);
+        $data = [$title, $now];
+        fputcsv($stream, $data);
 
-                mb_convert_variables('SJIS-win', 'UTF-8', $title);
-                mb_convert_variables('SJIS-win', 'UTF-8', $now);
-                $data = [$title, $now];
-                fputcsv($stream, $data);
-                // 改行させる
-                $data = [""];
-                fputcsv($stream, $data);
-                $cnt += 1;
-            }else{
-                $data = [$cnt, array_shift($students), array_shift($students)];
-                fputcsv($stream,$data);
-                $cnt += 1;
-            }
+        // 改行させる
+        $data = [""];
+        fputcsv($stream, $data);
+        
+        // 出席番号,学生番号,名前 で格納していく
+        for($i=0; $i<count($attendallname); $i++){
+            $data = [$i+1, $attendallid[$i], $attendallname[$i]];
+            fputcsv($stream,$data);
         }
     }
 
@@ -103,8 +98,9 @@ class LectureController extends Controller
     public function downloadTxt($lecture) {
 
         // 出席者を取得
-        $attendall = Lecture::where('id', $lecture)
-            ->value('attendstudent');
+        $attendallname = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sname');
+        $attendallid = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sid');
+
         // 授業名を取得
         $title = Lecture::where('id', $lecture)
             ->value('title');
@@ -113,36 +109,36 @@ class LectureController extends Controller
         $time = new Carbon();
         $time->setTimezone('Asia/Tokyo');
 
-        $students = explode(",", $attendall);
-        # 先頭を1つ取り除く
-        array_shift($students);
         # 文字コード変換
-        mb_convert_variables('SJIS-win', 'UTF-8', $students); 
-        $title = $title." 出席者一覧";
-        mb_convert_variables('SJIS-win', 'UTF-8', $title);
-        mb_convert_variables('SJIS-win', 'UTF-8', $time);
+        mb_convert_variables('SJIS-win', 'UTF-8', $attendallname); 
+        mb_convert_variables('SJIS-win', 'UTF-8', $attendallid); 
           
         header('Content-Type: application/octet-stream');
         header("Content-Disposition: attachment; filename={$title}_出席者");
 
         $stream = fopen('php://output', 'w');
 
-        $cnt = 0;
-        while(count($students) > 0){
+        // タイトル付与
+        $t1 = $time->year;
+        $t2 = $time->month;
+        $t3 = $time->day;
+        $t4 = $time->hour;
+        $t5 = $time->minute;
+        $now = $t1."年".$t2."月".$t3."日".$t4."時".$t5."分";
 
-            // タイトルと時刻付与
-            if($cnt == 0){
-                $data = [$title, $time];
-                fputcsv($stream, $data);
-                // 改行させる
-                $data = [""];
-                fputcsv($stream, $data);
-                $cnt += 1;
-            }else{
-                $data = [$cnt, array_shift($students), array_shift($students)];
-                fputcsv($stream,$data);
-                $cnt += 1;
-            }
+        mb_convert_variables('SJIS-win', 'UTF-8', $title);
+        mb_convert_variables('SJIS-win', 'UTF-8', $now);
+        $data = [$title, $now];
+        fputcsv($stream, $data);
+
+        // 改行させる
+        $data = [""];
+        fputcsv($stream, $data);
+        
+        // 出席番号,学生番号,名前 で格納していく
+        for($i=0; $i<count($attendallname); $i++){
+            $data = [$i+1, $attendallid[$i], $attendallname[$i]];
+            fputcsv($stream,$data);
         }
     }
 
