@@ -16,26 +16,30 @@ class LectureController extends Controller
 {
 	// 教員が出席者を確認するとき
     public function showStudent($lecture) {
-    	// Lectureモデルから$lecture(番号)のlectureを検索して取得
-    	// 出席した学生一覧
-    	$attendall = Lecture::where('id', $lecture)
-    		->value('attendstudent');
 
-    	// 授業名を取得
-    	$lectitle = Lecture::where('id', $lecture)
-    		->value('title');
+        // 出席した学生数
+        $lecnum = \DB::table('lecture_students')->where('lid',$lecture)->count();
+        // 登録履修者数
+        $allnum = \DB::table('lectures')->where('id',$lecture)->value('number');
 
-    	// 授業の全履修者数を取得
-    	$lecnum = Lecture::where('id', $lecture)
-    		->value('number');
+        // 授業名を取得
+        $lectitle = Lecture::where('id', $lecture)
+            ->value('title');
+
+        // 出席した学生の名前と学生番号を取得
+        $attendallname = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sname');
+        $attendallid = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sid');
+
 
     	// ユーザーが教員のときのみ, 出席管理画面にアクセスできる
     	if(Auth::user()->student_id == 'teacher'){
     		// showStudentを表示
-	    	return view('showStudent', ['attendall' => $attendall,
-									'lectitle' => $lectitle,
-									'lecnum' => $lecnum,
-                                    'lecture' => $lecture,
+	    	return view('showStudent', ['attendallname' => $attendallname,
+                                        'attendallid' => $attendallid,
+									   'lectitle' => $lectitle,
+									   'lecnum' => $lecnum,
+                                        'lecture' => $lecture,
+                                        'allnum' => $allnum,
 									]);
     	}else{
     		return redirect('/');
@@ -146,20 +150,14 @@ class LectureController extends Controller
     public function clickUser(Request $request, $lecture) {
     	$user = Auth::user();
 
-    	// Lectureモデルから$lecture(番号)のlectureを検索して取得
-    	$setpos = Lecture::where('id', $lecture)
-    		->value('attendstudent');
-
-		// ,名前,学生番号,名前,学生番号... の順に格納していく
-    	$setpos = $setpos.",".$user->student_id;
-    	$setpos = $setpos.",".$user->name;
-
-    	// 取得したlectureのattendstudentにuserのnameとstudent_idを格納
-    	Lecture::where('id', $lecture)
-    		->update([
-    			'attendstudent' => $setpos
-    		]);
+        \DB::table('lecture_students')->insert([
+            'lid' => $lecture,
+            'sname' => $user->name,
+            'sid' => $user->student_id,
+        ]);
 
         return redirect('/')->with('my_status', __('出席完了'));
+
+
     }
 }

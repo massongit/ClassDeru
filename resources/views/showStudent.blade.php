@@ -109,12 +109,7 @@
 
 	        	<h2><font color="blue">
 				    <?php
-				    	// 出席した学生を , で分割
-				    	$student = explode(",", $attendall);
-
-				    	// 出席者数を取得
-				    	$num = (count($student)-1)/2;
-				    	echo $num." / ".$lecnum." 人"."<br>";
+				    	echo $lecnum." / ".$allnum." 人"."<br>";
 				    ?>
 				</font></h2>
 
@@ -122,17 +117,11 @@
 
 			    <B>
 			    <?php
-
-			    	// 1人ずつ学生を表示
-			    	// 名前,学生番号,名前,学生番号 の順に並んでいる
-			    	$cnt = 1;
-			     	foreach($student as $s) {
-			     		echo $s."&emsp;";
-			     		$cnt += 1;
-			     		if($cnt % 2 == 0){
-			     			echo "<br>";
-			     		}
-			     	}
+                    // 出席した学生の学生番号と名前を表示
+                    for($i=0; $i<count($attendallname); $i++){
+                        echo $attendallid[$i]."&emsp;".$attendallname[$i];
+                        echo "<br>";
+                    }
 			     ?>
 			 	</B>
 
