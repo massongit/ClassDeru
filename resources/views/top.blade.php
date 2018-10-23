@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    ClassDeru 授業出席システム
+                    ClassDeru
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -75,28 +75,12 @@
             </div>
         </nav>
 
-       {{-- フラッシュ・メッセージ --}}
-        @if (session('my_status'))
-            <div class="container mt-2">
-                <div class="alert alert-success">
-                    {{ session('my_status') }}
-                </div>
-            </div>
-        @endif
-
-
 
         <main class="py-4">
-            @guest
-                @yield('content')
-            @else
-                <!-- student_idが teacher かどうかで判別 -->
-                @if (Auth::user()->student_id != 'teacher')
-                    @yield('studentlec')
-                @else
-                    @yield('content')   
-                @endif
-            @endif
+            <div class="border">
+                <img alt="study" src="{{ asset('/img/study_icon.png') }}" class="img1">
+                ClassDeru
+            </div>
         </main>
     </div>
 

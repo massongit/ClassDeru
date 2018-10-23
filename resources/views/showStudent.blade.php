@@ -84,14 +84,14 @@
 
 	        	&emsp;&emsp;
 
-                <form action="/lecture/{{ $lecture }}/csvdownload" method="GET">
-                    <a href="/lecture/{{ $lecture }}/csvdownload">
+                <form action="/user/lecture/{{ $lecture }}/csvdownload" method="GET">
+                    <a href="/user/lecture/{{ $lecture }}/csvdownload">
                         CSVダウンロード
                     </a>
                 </form>
 			 	&emsp;&emsp;&emsp;&emsp;
-                <form action="/lecture/{{ $lecture }}/txtdownload" method="GET">
-                    <a href="/lecture/{{ $lecture }}/txtdownload">
+                <form action="/user/lecture/{{ $lecture }}/txtdownload" method="GET">
+                    <a href="/user/lecture/{{ $lecture }}/txtdownload">
                         txtダウンロード
                     </a>
                 </form>

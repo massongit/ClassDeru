@@ -14,7 +14,7 @@
 					@include('common.errors')
 
 					<!-- 新規授業登録フォーム -->
-					<form action="/lecture" method="POST" class="form-horizontal">
+					<form action="/user/lecture" method="POST" class="form-horizontal">
 						{{ csrf_field() }}
 
 						<!-- 追加する授業の情報 -->
@@ -103,7 +103,7 @@
 
 										<!-- 出席者確認ボタン -->
 										<td>
-											<form action="/lecture/{{ $lecture->id}}/kekka" method="GET">
+											<form action="/user/lecture/{{ $lecture->id}}/kekka" method="GET">
 												
 												<button type="submit" class="btn btn-info" value="{{Auth::user()->student_id}}">確認
 												</button>
@@ -112,7 +112,7 @@
 
 										<!-- 削除ボタン -->
 										<td>
-											<form action="/lecture/{{ $lecture->id }}" method="POST">
+											<form action="/user/lecture/{{ $lecture->id }}" method="POST">
 												{{ csrf_field() }}
 												{{ method_field('DELETE') }}
 
@@ -165,7 +165,7 @@
 
 								<!-- 出席ボタン -->
 								<td>
-									<form action="/lecture/{{ $lecture->id }}/$userpass" method="POST" onSubmit="attention()">
+									<form action="/user/lecture/{{ $lecture->id }}/$userpass" method="POST" onSubmit="attention()">
 										{{ csrf_field() }}
 
 										<button type="submit" class="btn btn-success"　value="">
