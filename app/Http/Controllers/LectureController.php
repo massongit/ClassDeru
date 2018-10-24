@@ -168,7 +168,7 @@ class LectureController extends Controller
             'sid' => $user->student_id,
         ]);
 
-        return redirect('/')->with('my_status', __('出席完了'));
+        return redirect('/user')->with('my_status', __('出席完了'));
 
 
     }
