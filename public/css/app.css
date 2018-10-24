@@ -9,18 +9,36 @@
 div.border {
 	position: relative;
 	top: 30px;
-	left: 210px;
+	left: 310px;
     background-color: #F0F8FF; /* 線色 */
     border-radius: 20px; /* 線幅の半分 */
     display: block;
-    height: 500px; /* 線幅 */
-    width: 1000px;
+    height: 800px; /* 線幅 */
+    width: 800px;
 }
 
  img.img1 {
  	position: relative;
  	top: 100px;
- 	left: 100px;
- 	width: 320px;
+ 	left: 30px;
+ 	width: 310px;
  	height: 300px;
  }
+
+ .title_name {
+ 	position: absolute;
+ 	top: 60px;
+ 	left: 350px;
+ 	font-size: 70px;
+ 	color: #0066CC;
+ 	font-family: 'Helvetica Neue',sans-serif;
+ }
+
+ .content_text {
+ 	position: absolute;
+ 	top: 220px;
+ 	left: 350px;
+ 	font-size: 20px;
+ }
+
+

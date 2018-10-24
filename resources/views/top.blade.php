@@ -82,9 +82,14 @@
         <main class="py-4">
             <div class="border">
                 <img alt="study" src="{{ asset('/img/study_icon.png') }}" class="img1">
-                ClassDeru
+                <div class="title_name">ClassDeru</div>
+                <div class="content_text">
+                    &nbsp;ClassDeru(クラスデル)は授業の出席を簡単に取ることのできるWebアプリです。
+                </div>
             </div>
         </main>
+        <br>
+        <center>&copy;2018 ClassDeru</center>
     </div>
 
 </body>
