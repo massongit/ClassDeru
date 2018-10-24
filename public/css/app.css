@@ -104,17 +104,17 @@ div.border {
 
  img.img1 {
  	position: relative;
- 	top: 45px;
- 	left: 15px;
- 	width: 90px;
- 	height: 80px;
+ 	top: 50px;
+ 	left: 10px;
+ 	width: 80px;
+ 	height: 70px;
  }
 
  .title_name {
  	position: absolute;
- 	top: 50px;
- 	left: 110px;
- 	font-size: 45px;
+ 	top: 45px;
+ 	left: 90px;
+ 	font-size: 55px;
  	color: #0066CC;
  	font-family: 'Helvetica Neue',sans-serif;
  }
@@ -153,14 +153,14 @@ div.border {
 
  .content_text {
  	position: absolute;
- 	top: 170px;
+ 	top: 150px;
  	left: 10px;
- 	font-size: 18px;
+ 	font-size: 17px;
  }
 
  .teacher_detail {
  	position: absolute;
- 	top: 300px;
+ 	top: 270px;
  	width: 210px;
  	left: 10px;
  	font-size: 15px;
@@ -168,7 +168,7 @@ div.border {
 
  .student_detail{
  	position: absolute;
- 	top: 460px;
+ 	top: 430px;
  	width: 220px;
  	left: 10px;
  	font-size: 15px;
