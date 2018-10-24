@@ -89,18 +89,18 @@ img.img1 {
  	font-size: 15px;
  }
 
+ .cr {
+ 	position: absolute;
+ 	top: 695px;
+ 	left: 660px;
+ }
+
  .github {
   	position: absolute;
  	top: 690px;
  	left: 580px;
  	width: 70px;
  	height: 28px;
- }
-
- .copy_right {
- 	position: absolute;
- 	top: 695px;
- 	left: 660px;
  }
 
 
@@ -115,7 +115,7 @@ img.img1 {
     height: 540px;
     width: 360px;
  }
-
+ 
  img.img1 {
  	position: relative;
  	top: 50px;
@@ -196,7 +196,7 @@ img.img1 {
  	height: 28px;
  }
 
- .copy {
+ .cr {
  	position: absolute;
  	top: 660px;
  	left: 140px;
