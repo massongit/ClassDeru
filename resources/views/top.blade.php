@@ -88,16 +88,16 @@
                 </div>
 
                 <div class="teacher_detail">
-                    教員側<br>
-                    教員は授業に出席した学生をリアルタイムに確認でき、
-                    csvやtxt形式で出席データをDLできます。
+                    <B>教員側</B><br>
+                    &nbsp;教員は授業に出席している学生をリアルタイムで確認でき、
+                    csvやtxt形式で出席データをダウンロードできます。
                     <img alt="csv" src="{{ asset('/img/csvicon.png') }}" class="csv">
                     <img alt="csv" src="{{ asset('/img/txticon.png') }}" class="txt">
                 </div>
 
                 <div class="student_detail">
-                    学生側<br>
-                    学生はスマホやPCから1タップで授業に出席できます。
+                    <B>学生側</B><br>
+                    &nbsp;学生はPCやスマホから1タップで授業に出席できます。
                     <img alt="pc" src="{{ asset('/img/pc.png') }}" class="pc">
                     <img alt="sm" src="{{ asset('/img/smaph.png') }}" class="smaph">
                 </div>

@@ -21,7 +21,7 @@ div.border {
  	position: relative;
  	top: 50px;
  	left: 30px;
- 	width: 310px;
+ 	width: 330px;
  	height: 300px;
  }
 
@@ -76,7 +76,7 @@ div.border {
  .teacher_detail {
  	position: absolute;
  	top: 400px;
- 	width: 400px;
+ 	width: 410px;
  	left: 50px;
  	font-size: 15px;
  }
@@ -90,6 +90,91 @@ div.border {
  }
 
 
+@media screen and (max-width: 480px) {
+div.border {
+	position: relative;
+	top: 5px;
+	left: 20px;
+    background-color: #F0F8FF;
+    border-radius: 20px;
+    display: block;
+    height: 590px;
+    width: 360px;
+}
+
+ img.img1 {
+ 	position: relative;
+ 	top: 30px;
+ 	left: 20px;
+ 	width: 130px;
+ 	height: 120px;
+ }
+
+ .pc {
+ 	position: absolute;
+ 	top: 30px;
+ 	left: 220px;
+ 	width: 45px;
+ 	height: 45px;
+ }
+
+ .smaph {
+  	position: absolute;
+ 	top: 30px;
+ 	left: 270px;
+ 	width: 40px;
+ 	height: 40px;
+ }
+
+ .csv {
+   	position: absolute;
+ 	top: 55px;
+ 	left: 220px;
+ 	width: 40px;
+ 	height: 40px;	
+ }
+
+ .txt {
+   	position: absolute;
+   	top: 55px;
+ 	left: 270px;
+ 	width: 40px;
+ 	height: 40px;	
+ }
+
+ .title_name {
+ 	position: absolute;
+ 	top: 50px;
+ 	left: 140px;
+ 	font-size: 45px;
+ 	color: #0066CC;
+ 	font-family: 'Helvetica Neue',sans-serif;
+ }
+
+ .content_text {
+ 	position: absolute;
+ 	top: 170px;
+ 	left: 10px;
+ 	font-size: 18px;
+ }
+
+ .teacher_detail {
+ 	position: absolute;
+ 	top: 300px;
+ 	width: 210px;
+ 	left: 10px;
+ 	font-size: 15px;
+ }
+
+ .student_detail{
+ 	position: absolute;
+ 	top: 460px;
+ 	width: 200px;
+ 	left: 10px;
+ 	font-size: 15px;
+ }
+
+}
 
 
 
