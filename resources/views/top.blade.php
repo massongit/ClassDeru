@@ -101,10 +101,16 @@
                     <img alt="pc" src="{{ asset('/img/pc.png') }}" class="pc">
                     <img alt="sm" src="{{ asset('/img/smaph.png') }}" class="smaph">
                 </div>
+
             </div>
         </main>
         <br>
+
+        <a href="https://github.com/kons16/ClassDeru" target="_blank">
+            <img alt="sm" src="{{ asset('/img/github_logo.png') }}" class="github">
+        </a>
         <center>&copy;2018 ClassDeru</center>
+        
     </div>
 
 </body>

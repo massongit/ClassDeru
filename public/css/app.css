@@ -13,7 +13,7 @@ div.border {
     background-color: #F0F8FF;
     border-radius: 20px;
     display: block;
-    height: 650px;
+    height: 600px;
     width: 800px;
 }
 
@@ -89,6 +89,14 @@ div.border {
  	font-size: 15px;
  }
 
+ .github {
+  	position: absolute;
+ 	top: 720px;
+ 	left: 580px;
+ 	width: 70px;
+ 	height: 28px;
+ }
+
 
 @media screen and (max-width: 480px) {
 div.border {
@@ -98,7 +106,7 @@ div.border {
     background-color: #F0F8FF;
     border-radius: 20px;
     display: block;
-    height: 590px;
+    height: 540px;
     width: 360px;
 }
 
@@ -172,6 +180,14 @@ div.border {
  	width: 220px;
  	left: 10px;
  	font-size: 15px;
+ }
+
+ .github {
+  	position: absolute;
+ 	top: 630px;
+ 	left: 160px;
+ 	width: 70px;
+ 	height: 28px;
  }
 
 }
