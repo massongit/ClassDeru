@@ -48,57 +48,7 @@ class LectureController extends Controller
 
     // 教員が出席者データをcsvでダウンロードするとき
     public function downloadCSV($lecture) {
-        // 出席者を取得
-        $attendallname = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sname');
-        $attendallid = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sid');
-        // 全出席者数を取得
-        $syuseki_num = \DB::table('lecture_students')->where('lid',$lecture)->count();
-        // 履修者数を取得
-        $risyu_num = \DB::table('lectures')->where('id',$lecture)->value('number');
-
-        // 授業名を取得
-        $title = Lecture::where('id', $lecture)
-            ->value('title');
-
-        // 時刻取得
-        $time = new Carbon();
-        $time->setTimezone('Asia/Tokyo');
-
-        # 文字コード変換
-        mb_convert_variables('SJIS-win', 'UTF-8', $attendallname);
-        mb_convert_variables('SJIS-win', 'UTF-8', $attendallid); 
-          
-        header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename={$title}_出席者.csv");
-
-        $stream = fopen('php://output', 'w');
-
-        // タイトル付与
-        $t1 = $time->year;
-        $t2 = $time->month;
-        $t3 = $time->day;
-        $t4 = $time->hour;
-        $t5 = $time->minute;
-        $now = $t1."年".$t2."月".$t3."日".$t4."時".$t5."分";
-
-        // 出席者数
-        $num = $syuseki_num."/".$risyu_num." 人";
-
-        mb_convert_variables('SJIS-win', 'UTF-8', $num); 
-        mb_convert_variables('SJIS-win', 'UTF-8', $title);
-        mb_convert_variables('SJIS-win', 'UTF-8', $now);
-        $data = [$title, $num, $now];
-        fputcsv($stream, $data);
-
-        // 改行させる
-        $data = [""];
-        fputcsv($stream, $data);
-        
-        // 出席番号,学生番号,名前 で格納していく
-        for($i=0; $i<count($attendallname); $i++){
-            $data = [$i+1, $attendallid[$i], $attendallname[$i]];
-            fputcsv($stream,$data);
-        }
+        echo \Request::ip();
     }
 
 

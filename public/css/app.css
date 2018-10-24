@@ -8,7 +8,7 @@
 
 div.border {
 	position: relative;
-	top: 30px;
+	top: 5px;
 	left: 310px;
     background-color: #F0F8FF;
     border-radius: 20px;
@@ -17,7 +17,7 @@ div.border {
     width: 800px;
 }
 
- img.img1 {
+img.img1 {
  	position: relative;
  	top: 80px;
  	left: 30px;
@@ -91,15 +91,21 @@ div.border {
 
  .github {
   	position: absolute;
- 	top: 720px;
+ 	top: 690px;
  	left: 580px;
  	width: 70px;
  	height: 28px;
  }
 
+ .copy {
+ 	position: absolute;
+ 	top: 695px;
+ 	left: 660px;
+ }
+
 
 @media screen and (max-width: 480px) {
-div.border {
+ div.border {
 	position: relative;
 	top: 5px;
 	left: 10px;
@@ -108,7 +114,7 @@ div.border {
     display: block;
     height: 540px;
     width: 360px;
-}
+ }
 
  img.img1 {
  	position: relative;
@@ -190,7 +196,11 @@ div.border {
  	height: 28px;
  }
 
+ .copy {
+ 	position: absolute;
+ 	top: 660px;
+ 	left: 140px;
+ }
+
 }
-
-
 

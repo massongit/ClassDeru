@@ -109,8 +109,8 @@
         <a href="https://github.com/kons16/ClassDeru" target="_blank">
             <img alt="sm" src="{{ asset('/img/github_logo.png') }}" class="github">
         </a>
-        <center>&copy;2018 ClassDeru</center>
-        
+        <div class="copy">&copy;2018 ClassDeru</div>
+
     </div>
 
 </body>
