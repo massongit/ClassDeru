@@ -33,7 +33,14 @@ Route::group(['middleware' => ['web']], function () {
 		$lecture->dep = $request->dep;
 		$lecture->number = $request->number;
 		$lecture->date = $request->date;
-		$lecture->lecpass = $request->lecpass;
+
+		// パスワードが記入されていたら代入する
+		if($request->lecpass != ""){
+			$lecture->lecpass = $request->lecpass;
+		}else{
+			$lecture->lecpass = "";
+		}
+
 		$lecture->user_id = $request->user()->id;
 		$lecture->save();
 

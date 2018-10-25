@@ -11,7 +11,7 @@ class Lecture extends Model
 	}
 
     protected $fillable = [
-        'title', 'univ', 'gra', 'dep', 'number', 'date',
+        'title', 'univ', 'gra', 'dep', 'number', 'date', 'lecpass',
     ];
 
     // 教員側の授業一覧に「出席」を押した学生の数を表示する
