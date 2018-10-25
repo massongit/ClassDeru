@@ -62,7 +62,7 @@
 							<label for="task-name" class="col-sm-3 control-label">パスワード(未記入可)</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="lecpass" id="lecpass" class="form-control" value="{{ old('lecpass') }}">
+								<input type="text" name="lecpass" id="lecpass" class="form-control" autocomplete="off" value="{{ old('lecpass') }}">
 							</div>
 						</div>
 
@@ -187,13 +187,15 @@
 								<td>
 									<form action="/user/lecture/{{ $lecture->id }}" method="POST" onSubmit="attention()">
 										
-										<div class="col-sm-6">
-											<input type="text" name="userpass" id="userpass" class="form-control" value="">
+										<div class="col-sm-6" style="display:inline-flex">
+											<input type="text" name="userpass" id="userpass" class="form-control" value="" autocomplete="off">
 										</div>
-										 <input type="hidden" name="_token" value="{{csrf_token()}}"></div>
+
+										<input type="hidden" name="_token" value="{{csrf_token()}}">
 										<button type="submit" class="btn btn-success"　value="">
 											出席
 										</button>
+
 									</form>
 								</td>
 							</tr>
