@@ -162,9 +162,10 @@ class LectureController extends Controller
     public function clickUser(Request $request, $lecture) {
     	$user = Auth::user();
 
+        // 授業のパスワードを取得
         $pass = \DB::table('lectures')->where('id',$lecture)->value('lecpass');
 
-
+        // 授業のパスワードと学生が入力したパスワードが一致しているかどうかどうか
         if($pass == $request->userpass || $pass=='000'){
             \DB::table('lecture_students')->insert([
                 'lid' => $lecture,
