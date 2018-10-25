@@ -57,6 +57,13 @@
 							<div class="col-sm-6">
 								<input type="text" name="date" id="date" class="form-control" value="{{ old('date') }}">
 							</div>
+
+
+							<label for="task-name" class="col-sm-3 control-label">パスワード(未記入可)</label>
+
+							<div class="col-sm-6">
+								<input type="text" name="lecpass" id="lecpass" class="form-control" value="{{ old('lecpass') }}">
+							</div>
 						</div>
 
 
@@ -83,6 +90,7 @@
 								<th>授業名</th>
 								<th>出席者数 / 全履修数</th>
 								<th>教室・連絡</th>
+								<th>パスワード</th>
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
 							</thead>
@@ -99,6 +107,11 @@
 										<!-- 連絡事項を表示 -->
 										<td>
 											{{ $lecture->date }}
+										</td>
+
+										<!-- パスワードを表示 -->
+										<td>
+											{{ $lecture->lecpass }}
 										</td>
 
 										<!-- 出席者確認ボタン -->
@@ -138,6 +151,7 @@
 <!-- ログインしている学生側に表示する授業一覧 -->
 @section('studentlec')
 	@if (count($lectures)>0 and count($lecTeachers)>0)
+		<?php echo  $userpass=""; ?>
 		<div class="panel panel-default">
 
 			<div class="panel-body">
@@ -146,6 +160,7 @@
 						<th>現在開講している授業</th>
 						<th>教員名</th>
 						<th>教室・連絡事項</th>
+						<th>パスワード</th>
 						<th>&nbsp;</th>
 					</thead>
 					<tbody>
@@ -163,11 +178,19 @@
 									{{ $lecture->date }}
 								</td>
 
+								<!-- パスワード入力フォーム-->
+								</td>
+
+								</td>
+
 								<!-- 出席ボタン -->
 								<td>
-									<form action="/user/lecture/{{ $lecture->id }}/$userpass" method="POST" onSubmit="attention()">
-										{{ csrf_field() }}
-
+									<form action="/user/lecture/{{ $lecture->id }}" method="POST" onSubmit="attention()">
+										
+										<div class="col-sm-6">
+											<input type="text" name="userpass" id="userpass" class="form-control" value="">
+										</div>
+										 <input type="hidden" name="_token" value="{{csrf_token()}}"></div>
 										<button type="submit" class="btn btn-success"　value="">
 											出席
 										</button>

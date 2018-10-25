@@ -162,14 +162,19 @@ class LectureController extends Controller
     public function clickUser(Request $request, $lecture) {
     	$user = Auth::user();
 
-        \DB::table('lecture_students')->insert([
-            'lid' => $lecture,
-            'sname' => $user->name,
-            'sid' => $user->student_id,
-        ]);
-
-        return redirect('/user')->with('my_status', __('出席完了'));
+        $pass = \DB::table('lectures')->where('id',$lecture)->value('lecpass');
 
 
+        if($pass == $request->userpass || $pass=='000'){
+            \DB::table('lecture_students')->insert([
+                'lid' => $lecture,
+                'sname' => $user->name,
+                'sid' => $user->student_id,
+            ]);
+
+            return redirect('/user')->with('my_status', __('出席完了'));
+        }else{
+            return redirect('/user')->with('my_status_2', __('パスワードが違います。'));
+        }
     }
 }

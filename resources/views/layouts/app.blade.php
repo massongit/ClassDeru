@@ -87,6 +87,13 @@
             </div>
         @endif
 
+        @if (session('my_status_2'))
+            <div class="container mt-2">
+                <div class="alert alert-danger">
+                    {{ session('my_status_2') }}
+                </div>
+            </div>
+        @endif
 
 
         <main class="py-4">
@@ -101,7 +108,7 @@
                 @endif
             @endif
         </main>
-        
+
     </div>
 
 </body>
