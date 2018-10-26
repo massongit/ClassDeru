@@ -58,7 +58,10 @@ Route::group(['middleware' => ['web']], function () {
 
 	// 教員が削除ボタンを押したとき
 	Route::delete('/user/lecture/{lecture}', ['middleware' => 'auth',function(Lecture $lecture) {
+		// 授業と授業の出席者を削除
 		$lecture->delete();
+		\DB::table('lecture_students')->where('lid',$lecture->id)->delete();
+
 		return redirect('/user');
 	}]);
 
