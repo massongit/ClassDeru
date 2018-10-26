@@ -14,6 +14,31 @@ use Carbon\Carbon;
 
 class LectureController extends Controller
 {
+    // 教員が授業を追加する
+    public function addLecture(Request $request) {
+        $lecture = new Lecture;
+    
+        $lecture->title = $request->title;
+        $lecture->univ = $request->univ;
+        $lecture->gra = $request->gra;
+        $lecture->dep = $request->dep;
+        $lecture->number = $request->number;
+        $lecture->date = $request->date;
+
+        // パスワードが記入されていたら代入する
+        if($request->lecpass != ""){
+            $lecture->lecpass = $request->lecpass;
+        }else{
+            $lecture->lecpass = "";
+        }
+
+        $lecture->user_id = $request->user()->id;
+        $lecture->save();
+
+        return redirect('/user');
+    }
+
+
 	// 教員が出席者を確認するとき
     public function showStudent($lecture) {
 
@@ -45,6 +70,7 @@ class LectureController extends Controller
     		return redirect('/');
     	}
     }
+
 
     // 教員が出席者データをcsvでダウンロードするとき
     public function downloadCSV($lecture) {
@@ -104,11 +130,10 @@ class LectureController extends Controller
 
     // 教員が出席者データをtxtでダウンロードするとき
     public function downloadTxt($lecture) {
-
-        // 出席者を取得
+        // 出席者の名前と学生番号を取得
         $attendallname = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sname');
         $attendallid = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sid');
-                // 全出席者数を取得
+        // 全出席者数を取得
         $syuseki_num = \DB::table('lecture_students')->where('lid',$lecture)->count();
         // 履修者数を取得
         $risyu_num = \DB::table('lectures')->where('id',$lecture)->value('number');
@@ -130,7 +155,7 @@ class LectureController extends Controller
 
         $stream = fopen('php://output', 'w');
 
-        // タイトル付与
+        // 時刻付与
         $t1 = $time->year;
         $t2 = $time->month;
         $t3 = $time->day;
@@ -157,6 +182,7 @@ class LectureController extends Controller
             fputcsv($stream,$data);
         }
     }
+    
 
     // 学生が出席をクリックしたとき
     public function clickUser(Request $request, $lecture) {
@@ -179,3 +205,5 @@ class LectureController extends Controller
         }
     }
 }
+
+

@@ -21,36 +21,14 @@ Route::group(['middleware' => ['web']], function () {
 		return view('top');
 	});
 
+	// 授業の表示
 	Route::get('/user', 'PagesController@show')->middleware('auth');
 
 	// 教員が授業を追加
-	Route::post('/user/lecture', ['middleware' => 'auth',function(Request $request) {
-
-		$lecture = new Lecture;
-		$lecture->title = $request->title;
-		$lecture->univ = $request->univ;
-		$lecture->gra = $request->gra;
-		$lecture->dep = $request->dep;
-		$lecture->number = $request->number;
-		$lecture->date = $request->date;
-
-		// パスワードが記入されていたら代入する
-		if($request->lecpass != ""){
-			$lecture->lecpass = $request->lecpass;
-		}else{
-			$lecture->lecpass = "";
-		}
-
-		$lecture->user_id = $request->user()->id;
-		$lecture->save();
-
-		return redirect('/user');
-
-	}]);
+	Route::post('/user/lecture', 'LectureController@addLecture')->middleware('auth');
 
 	// 学生が出席ボタンを押したとき
 	Route::post('/user/lecture/{lecture}/', 'LectureController@clickUser')->middleware('auth');
-
 
 	// 教員が確認ボタンを押したとき
 	Route::get('/user/lecture/{lecture}/kekka', 'LectureController@showStudent')->middleware('auth');
