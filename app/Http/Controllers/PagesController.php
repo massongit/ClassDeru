@@ -36,6 +36,7 @@ class PagesController extends Controller
 		return view('lectures', [
 			'lectures' => $lectures,
 			'lecTeachers' => $lecTeachers,
+			'useruniv' => $user->univ,
 		]);
     }
 }

@@ -151,7 +151,7 @@
 <!-- ログインしている学生側に表示する授業一覧 -->
 @section('studentlec')
 	@if (count($lectures)>0 and count($lecTeachers)>0)
-		<?php echo  $userpass=""; ?>
+
 		<div class="panel panel-default">
 
 			<div class="panel-body">
@@ -204,6 +204,15 @@
 				</table>
 			</div>
 		</div>
+
+	@else
+
+		<div class="container mt-2">
+			<div class="alert alert-info">
+				<center>現在&nbsp;{{ $useruniv }}大学&nbsp;で開講されている授業はありません。</center>
+			</div>
+		</div>
+
 	@endif
 @endsection
 
