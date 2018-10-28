@@ -77,6 +77,7 @@ class LectureController extends Controller
         // 出席者を取得
         $attendallname = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sname');
         $attendallid = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sid');
+
         // 全出席者数を取得
         $syuseki_num = \DB::table('lecture_students')->where('lid',$lecture)->count();
         // 履修者数を取得
@@ -99,7 +100,7 @@ class LectureController extends Controller
 
         $stream = fopen('php://output', 'w');
 
-        // タイトル付与
+        // 時刻付与
         $t1 = $time->year;
         $t2 = $time->month;
         $t3 = $time->day;
@@ -133,6 +134,7 @@ class LectureController extends Controller
         // 出席者の名前と学生番号を取得
         $attendallname = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sname');
         $attendallid = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sid');
+        
         // 全出席者数を取得
         $syuseki_num = \DB::table('lecture_students')->where('lid',$lecture)->count();
         // 履修者数を取得
@@ -182,7 +184,7 @@ class LectureController extends Controller
             fputcsv($stream,$data);
         }
     }
-    
+
 
     // 学生が出席をクリックしたとき
     public function clickUser(Request $request, $lecture) {
