@@ -20,7 +20,7 @@ class LectureController extends Controller
         // 何か記入漏れがあった場合の処理
         if($request->title == "" or $request->univ == "" or $request->gra == "" or $request->dep == "" or $request->number == "" or $request->date == ""){
 
-            return redirect('/user')->with('my_status_2', __('記入漏れがあります。'));
+            return redirect('/user')->with('my_status_2', __('未記入項目があります。'));
 
         }else{
             // 正しく記入されている場合の処理
