@@ -16,26 +16,35 @@ class LectureController extends Controller
 {
     // 教員が授業を追加する
     public function addLecture(Request $request) {
-        $lecture = new Lecture;
-    
-        $lecture->title = $request->title;
-        $lecture->univ = $request->univ;
-        $lecture->gra = $request->gra;
-        $lecture->dep = $request->dep;
-        $lecture->number = $request->number;
-        $lecture->date = $request->date;
 
-        // パスワードが記入されていたら代入する
-        if($request->lecpass != ""){
-            $lecture->lecpass = $request->lecpass;
+        // 何か記入漏れがあった場合の処理
+        if($request->title == "" or $request->univ == "" or $request->gra == "" or $request->dep == "" or $request->number == "" or $request->date == ""){
+
+            return redirect('/user')->with('my_status_2', __('記入漏れがあります。'));
+
         }else{
-            $lecture->lecpass = "";
+            // 正しく記入されている場合の処理
+            $lecture = new Lecture;
+        
+            $lecture->title = $request->title;
+            $lecture->univ = $request->univ;
+            $lecture->gra = $request->gra;
+            $lecture->dep = $request->dep;
+            $lecture->number = $request->number;
+            $lecture->date = $request->date;
+
+            // パスワードが記入されていたら代入する
+            if($request->lecpass != ""){
+                $lecture->lecpass = $request->lecpass;
+            }else{
+                $lecture->lecpass = "";
+            }
+
+            $lecture->user_id = $request->user()->id;
+            $lecture->save();
+
+            return redirect('/user');
         }
-
-        $lecture->user_id = $request->user()->id;
-        $lecture->save();
-
-        return redirect('/user');
     }
 
 
