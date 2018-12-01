@@ -17,7 +17,7 @@ class LectureController extends Controller
     // 教員が授業を追加する
     public function addLecture(Request $request) {
 
-        // 何か記入漏れがあった場合の処理
+        // 記入漏れがあった場合の処理
         if($request->title == "" or $request->univ == "" or $request->gra == "" or $request->dep == "" or $request->number == "" or $request->date == ""){
 
             return redirect('/user')->with('my_status_2', __('未記入項目があります。'));
@@ -202,13 +202,23 @@ class LectureController extends Controller
         // 授業のパスワードを取得
         $pass = \DB::table('lectures')->where('id',$lecture)->value('lecpass');
 
-        // 授業のパスワードと学生が入力したパスワードが一致しているかどうかどうか
+        // 授業のパスワードと学生が入力したパスワードが一致しているか
         if($pass == $request->userpass || $pass=='000'){
-            \DB::table('lecture_students')->insert([
-                'lid' => $lecture,
-                'sname' => $user->name,
-                'sid' => $user->student_id,
-            ]);
+
+            // 授業の出席者の学生番号を配列で取得
+            $s = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sid')->toArray();
+
+            // 出席クリックした学生が既に出席者配列に含まれていたとき
+            if(in_array($user->student_id, (array)$s)){
+                return redirect('/user')->with('my_status_2', __('出席済みです。'));
+            }else{
+                // 出席者配列に新しく追加
+                \DB::table('lecture_students')->insert([
+                    'lid' => $lecture,
+                    'sname' => $user->name,
+                    'sid' => $user->student_id,
+                ]);
+            }
 
             return redirect('/user')->with('my_status', __('出席完了'));
         }else{
@@ -216,5 +226,4 @@ class LectureController extends Controller
         }
     }
 }
-
 

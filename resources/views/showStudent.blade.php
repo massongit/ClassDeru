@@ -118,15 +118,15 @@
 
 				<hr size="5" width="50%" color="green">
 
-			    <B>
-			    <?php
-                    // 出席した学生の学生番号と名前を表示
-                    for($i=0; $i<count($attendallname); $i++){
-                        echo $attendallid[$i]."&emsp;".$attendallname[$i];
-                        echo "<br>";
-                    }
-			     ?>
-			 	</B>
+			    <div class='sname'>
+    			    <?php
+                        // 出席した学生の学生番号と名前を表示
+                        for($i=0; $i<count($attendallname); $i++){
+                            echo $attendallid[$i]."&emsp;".$attendallname[$i];
+                            echo "<br>";
+                        }
+    			     ?>
+			 	</div>
 
 			    <br>
 			    <br>
