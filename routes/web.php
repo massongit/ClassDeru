@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
 Route::group(['middleware' => ['web']], function () {
@@ -32,7 +27,6 @@ Route::group(['middleware' => ['web']], function () {
 
 	// 教員が確認ボタンを押したとき
 	Route::get('/user/lecture/{lecture}/kekka', 'LectureController@showStudent')->middleware('auth');
-
 
 	// 教員が削除ボタンを押したとき
 	Route::delete('/user/lecture/{lecture}', ['middleware' => 'auth',function(Lecture $lecture) {
