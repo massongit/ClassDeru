@@ -91,19 +91,21 @@
                     &nbsp;ClassDeru(クラスデル)は授業の出席を簡単に取ることのできるWebアプリです。
                 </div>
 
-                <div class="teacher_detail">
-                    <B>教員側</B><br>
-                    &nbsp;教員は授業に出席している学生をリアルタイムで確認でき、
-                    csvやtxt形式で出席データをダウンロードできます。
-                    <img alt="csv" src="{{ asset('/img/csvicon.png') }}" class="csv">
-                    <img alt="csv" src="{{ asset('/img/txticon.png') }}" class="txt">
-                </div>
+                <div class="detail">
+                    <div class="teacher_detail">
+                        <B>教員側</B><br>
+                        &nbsp;教員は授業に出席している学生をリアルタイムで確認でき、
+                        csvやtxt形式で出席データをダウンロードできます。
+                        <img alt="csv" src="{{ asset('/img/csvicon.png') }}" class="csv">
+                        <img alt="csv" src="{{ asset('/img/txticon.png') }}" class="txt">
+                    </div>
 
-                <div class="student_detail">
-                    <B>学生側</B><br>
-                    &nbsp;学生はPCやスマホから1タップで授業に出席できます。
-                    <img alt="pc" src="{{ asset('/img/pc.png') }}" class="pc">
-                    <img alt="sm" src="{{ asset('/img/smaph.png') }}" class="smaph">
+                    <div class="student_detail">
+                        <B>学生側</B><br>
+                        &nbsp;学生はPCやスマホから1タップで授業に出席できます。
+                        <img alt="pc" src="{{ asset('/img/pc.png') }}" class="pc">
+                        <img alt="sm" src="{{ asset('/img/smaph.png') }}" class="smaph">
+                    </div>
                 </div>
 
             </div>
