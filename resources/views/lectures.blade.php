@@ -7,7 +7,7 @@
 		<div class="col-sm-offset-2 col-sm-8">
 
 			<div class="box_lec">
-        <span class="box-title">授業を追加</span>
+        <span class="box-title">新規授業</span>
         <p>
           <form action="/user/lecture" method="POST" class="form-horizontal">
               {{ csrf_field() }}
@@ -35,7 +35,7 @@
               <div class="form-group col-md-4">
                 <label for="task-name" class="control-label">学科</label>
 
-                <input type="text" name="gra" id="gra" class="form-control" placeholder="(例) 情報工" value="{{ old('dep') }}">
+                <input type="text" name="dep" id="dep" class="form-control" placeholder="(例) 情報工" value="{{ old('dep') }}">
               </div>
             </div>
 
@@ -43,23 +43,31 @@
             <div class="form-group">
               <div class="col-sm-4">
                 <label for="task-name" class="control-label">全受講者数</label>
-                <input type="text" name="gra" id="gra" class="form-control" placeholder="(例) 100" value="{{ old('number') }}">
+                <input type="text" name="number" id="number" class="form-control" placeholder="(例) 100" value="{{ old('number') }}">
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-sm-4">
                 <label for="task-name" class="control-label">教室・連絡</label>
-                <input type="text" name="gra" id="gra" class="form-control" value="{{ old('date') }}">
+                <input type="text" name="date" id="date" class="form-control" value="{{ old('date') }}">
               </div>
             </div>
 
             <div class="form-group">
                <div class="col-sm-4">
                 <label for="task-name" class="control-label">パスワード(未入力可)</label>
-                <input type="text" name="gra" id="gra" class="form-control" value="{{ old('lecpass') }}">
+                <input type="text" name="lecpass" id="lecpass" class="form-control" value="{{ old('lecpass') }}" autocomplete="off" >
               </div>
             </div>
+
+            <div class="form-group">
+				<div class="col-sm-offset-3 col-sm-6">
+					<button type="submit" class="btn btn-success">
+						授業を追加する
+					</button>
+				</div>
+			</div>
           </form>
         </p>
     </div>
