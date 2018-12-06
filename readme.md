@@ -1,1 +1,2 @@
-### ClassDeru
+# ClassDeru
+大学で授業の出席を簡単に取ることのできるWebアプリです。
