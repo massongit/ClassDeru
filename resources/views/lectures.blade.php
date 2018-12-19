@@ -15,7 +15,7 @@
             <div class="form-group">
               <div class="form-group col-md-4">
                 <label for="task-name">授業名</label>
-                <input type="text" name="title" placeholder="(例) 数学解析" id="title" class="form-control" value="{{ old('title') }}">
+                <input type="text" name="title" placeholder="(例) 微分積分" id="title" class="form-control" value="{{ old('title') }}">
               </div>
             </div>
 
