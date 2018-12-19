@@ -15,6 +15,9 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    // アクセスを許可するIPアドレス
+    'allow_ip' => env('ALLOW_IP'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
