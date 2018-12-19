@@ -209,14 +209,10 @@ class LectureController extends Controller
     public function clickUser(Request $request, $lecture) {
         $user = Auth::user();
         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        //$allow_ip = config('app.allow_ip');
-        $allow_ip = getenv('ALLOW_IP'); // herokuから取得
+        //$allow_ip = config('app.allow_ip'); //ローカルの場合
+        $allow_ip = getenv('ALLOW_IP');       //herokuから取得
 
-        list($accept_ip, $mask)= explode("/", $allow_ip);
-        $accept_long = ip2long($accept_ip) >> (32 - $mask);
-        $user_long = ip2long($ip) >> (32 - $mask);
-
-        if($accept_long == $user_long){
+        if(checkip($ip, $allow_ip)){
             // 授業のパスワードを取得
             $pass = \DB::table('lectures')->where('id',$lecture)->value('lecpass');
 
@@ -244,7 +240,7 @@ class LectureController extends Controller
             }
 
         }else{
-            echo "大学内から出席してください。";
+            echo "教室内から出席してください。";
         }
         
     }
