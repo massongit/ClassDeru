@@ -212,36 +212,8 @@ class LectureController extends Controller
         //$allow_ip = config('app.allow_ip'); //ローカルの場合
         $allow_ip = getenv('ALLOW_IP');       //herokuから取得
 
-        if(checkip($ip, $allow_ip)){
-            // 授業のパスワードを取得
-            $pass = \DB::table('lectures')->where('id',$lecture)->value('lecpass');
-
-            // 授業のパスワードと学生が入力したパスワードが一致しているか
-            if($pass == $request->userpass || $pass=='000'){
-
-                // 授業の出席者の学生番号を配列で取得
-                $s = \DB::table('lecture_students')->where('lid',$lecture)->pluck('sid')->toArray();
-
-                // 出席クリックした学生が既に出席者配列に含まれていたとき
-                if(in_array($user->student_id, (array)$s)){
-                    return redirect('/user')->with('my_status_2', __('出席済みです。'));
-                }else{
-                    // 出席者配列に新しく追加
-                    \DB::table('lecture_students')->insert([
-                        'lid' => $lecture,
-                        'sname' => $user->name,
-                        'sid' => $user->student_id,
-                    ]);
-                }
-
-                return redirect('/user')->with('my_status', __('出席完了'));
-            }else{
-                return redirect('/user')->with('my_status_2', __('パスワードが違います。'));
-            }
-
-        }else{
-            echo "教室内から出席してください。";
-        }
+        echo $allow_ip."<br>";
+        echo $ip;
         
     }
 }
