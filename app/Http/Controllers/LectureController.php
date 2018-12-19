@@ -208,9 +208,9 @@ class LectureController extends Controller
     // 学生が出席をクリックしたとき
     public function clickUser(Request $request, $lecture) {
         $user = Auth::user();
-        $ip = "127.0.0.1";
-        $allow_ip = config('app.allow_ip'); //ローカルの場合
-        //$allow_ip = getenv('ALLOW_IP');       //herokuから取得
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        //$allow_ip = config('app.allow_ip'); //ローカルの場合
+        $allow_ip = getenv('ALLOW_IP');       //herokuから取得
 
         if(self::checkip($ip, $allow_ip)){
             // 授業のパスワードを取得
