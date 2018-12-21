@@ -194,12 +194,23 @@ class LectureController extends Controller
     }
 
     // IPアドレス判定
-    private function checkip(string $ip, string $ansip){
+    private function checkip(string $ip, string $ansip string $d1, string $d2, string $d3){
         list($accept_ip, $mask)= explode("/", $ansip);
+        list($deny_ip1, $m1)= explode("/", $d1);
+        list($deny_ip2, $m2)= explode("/", $d2);
+        list($deny_ip3, $m3)= explode("/", $d3);
+
         $accept_long = ip2long($accept_ip) >> (32 - $mask);
         $user_long = ip2long($ip) >> (32 - $mask);
 
-        if($accept_long == $user_long){
+        $deny_long1 = ip2long($deny_ip1) >> (32 - $m1);
+        $user_long1 = ip2long($ip) >> (32 - $m1);        
+        $deny_long2 = ip2long($deny_ip2) >> (32 - $m2);
+        $user_long2 = ip2long($ip) >> (32 - $m2);
+        $deny_long3 = ip2long($deny_ip3) >> (32 - $m3);
+        $user_long3 = ip2long($ip) >> (32 - $m3);
+
+        if($accept_long == $user_long and $deny_long1 != $user_long1 and $deny_long2 != $user_long2 and $deny_long3 != $user_long3){
             return true;
         }
         return false;
@@ -210,9 +221,15 @@ class LectureController extends Controller
         $user = Auth::user();
         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         //$allow_ip = config('app.allow_ip'); //ローカルの場合
+        //$d1_ip = config('app.deny1_ip');
+        //$d2_ip = config('app.deny2_ip');
+        //$d3_ip = config('app.deny3_ip');
         $allow_ip = getenv('ALLOW_IP');       //herokuから取得
+        $d1_ip = getenv('DENY1_IP');
+        $d2_ip = getenv('DENY1_IP');
+        $d3_ip = getenv('DENY1_IP');
 
-        if(self::checkip($ip, $allow_ip)){
+        if(self::checkip($ip, $allow_ip, $d1_ip, $d2_ip, $d3_ip)){
             // 授業のパスワードを取得
             $pass = \DB::table('lectures')->where('id',$lecture)->value('lecpass');
 

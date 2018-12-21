@@ -213,5 +213,10 @@ return [
 
     // アクセスを許可するIPアドレス
     'allow_ip' => env('ALLOW_IP'),
+    
+    // アクセスを拒否するIPアドレス
+    'deny1_ip' => env('DENY1_IP'),
+    'deny2_ip' => env('DENY2_IP'),
+    'deny3_ip' => env('DENY3_IP'),
 
 ];
