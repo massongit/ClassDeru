@@ -15,7 +15,7 @@
 https://classderu.herokuapp.com/  
 
 ## Deploying to Heroku
-1. Push [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/kons16/ClassDeru)
+1. Push [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 1. Install the Heroku CLI (See [The Heroku CLI | Heroku Dev Center](https://devcenter.heroku.com/articles/heroku-cli#download-and-install))
 1. Run `heroku login` (Login to Heroku)
 1. Run `heroku git:clone -a {App name}` (Clone git repository in heroku)
