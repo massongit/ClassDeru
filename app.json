@@ -1,7 +1,25 @@
 {
     "name": "classderu",
-   	"description": "you can attend classes",
+    "description": "you can attend classes",
     "repository": "https://github.com/kons16/ClassDeru",
     "logo": "https://pictogram-free.com/material/045-pictogram-free.jpg",
-    "keywords": ["php", "laravel"]
+    "keywords": [
+        "php",
+        "laravel"
+    ],
+    "addons": [
+        {
+            "plan": "heroku-postgresql:hobby-dev"
+        }
+    ],
+    "env": {
+        "APP_KEY": {
+            "description": "Application key",
+            "generator": "secret"
+        },
+        "DB_CONNECTION": {
+            "description": "Kind of database",
+            "value": "pgsql"
+        }
+    }
 }
