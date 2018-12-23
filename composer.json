@@ -53,7 +53,7 @@
             "@php artisan package:discover"
         ],
         "compile": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('.env') || copy('.env.heroku', '.env');\"",
             "@php artisan key:generate",
             "@php artisan migrate --seed --force"
         ]
