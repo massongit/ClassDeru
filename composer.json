@@ -1,7 +1,10 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -48,6 +51,11 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "compile": [
+            "@php -r \"file_exists('.env') || copy('.env.heroku', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --seed --force"
         ]
     },
     "config": {

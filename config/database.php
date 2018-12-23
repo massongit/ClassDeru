@@ -1,6 +1,6 @@
 <?php
 
-return [
+$database_configs = [
 
     /*
     |--------------------------------------------------------------------------
@@ -125,3 +125,38 @@ return [
     ],
 
 ];
+
+$database_url = env('DATABASE_URL', false);
+
+// For Heroku
+// Overwrite configs based on DATABASE_URL
+if ($database_url) {
+    $database_url_ = parse_url($database_url);
+    $database_url_scheme = $database_url_['scheme'];
+
+    if ($database_url_scheme == 'postgres') {
+        $database_url_scheme = 'pgsql';
+    }
+
+    if (array_key_exists($database_url_scheme, $database_configs['connections'])) {
+        $database_configs['default'] = $database_url_scheme;
+
+        if (array_key_exists('database', $database_configs['connections'][$database_configs['default']])
+            && array_key_exists('path', $database_url_)) {
+            $database_url_path = substr($database_url_['path'], 1);
+            $database_configs['connections'][$database_configs['default']]['database'] = $database_url_path;
+        }
+
+        foreach (['host', 'port', 'username', 'password'] as $k) {
+            if (array_key_exists($k, $database_configs['connections'][$database_configs['default']])) {
+                $k_ = substr($k, 0, 4);
+
+                if (array_key_exists($k_, $database_url_)) {
+                    $database_configs['connections'][$database_configs['default']][$k] = $database_url_[$k_];
+                }
+            }
+        }
+    }
+}
+
+return $database_configs;

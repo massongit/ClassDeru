@@ -15,10 +15,4 @@
 https://classderu.herokuapp.com/  
 
 ## Deploying to Heroku
-1. Push [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-1. Install the Heroku CLI (See [The Heroku CLI | Heroku Dev Center](https://devcenter.heroku.com/articles/heroku-cli#download-and-install))
-1. Run `heroku login` (Login to Heroku)
-1. Run `heroku git:clone -a {App name}` (Clone git repository in heroku)
-1. Run `cd {App name}` (Move to the cloned directory)
-2. Run `heroku config:set $(heroku config:get DATABASE_URL | awk '{print gensub(/postgres:\/\/(.+):(.+)@(.+):5432\/(.+)/, "DB_USERNAME=\"\\1\" DB_PASSWORD=\"\\2\" DB_HOST=\"\\3\" DB_DATABASE=\"\\4\"", "g")}')` (Set config vars)
-1. Run `heroku run php artisan migrate --seed` (Migrate database)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
