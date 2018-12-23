@@ -7,19 +7,17 @@
         "php",
         "laravel"
     ],
+    "buildpacks": [
+        {
+            "url": "heroku/php"
+        },
+        {
+            "url": "heroku/nodejs"
+        }
+    ],
     "addons": [
         {
             "plan": "heroku-postgresql:hobby-dev"
         }
-    ],
-    "env": {
-        "APP_KEY": {
-            "description": "Application key",
-            "generator": "secret"
-        },
-        "DB_CONNECTION": {
-            "description": "Kind of database",
-            "value": "pgsql"
-        }
-    }
+    ]
 }
