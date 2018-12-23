@@ -140,10 +140,21 @@ if ($database_url) {
 
     if (array_key_exists($database_url_scheme, $database_configs['connections'])) {
         $database_configs['default'] = $database_url_scheme;
-        $database_configs['connections'][$database_configs['default']]['database'] = substr($database_url_['path'], 1);
+
+        if (array_key_exists('database', $database_configs['connections'][$database_configs['default']])
+            && array_key_exists('path', $database_url_)) {
+            $database_url_path = substr($database_url_['path'], 1);
+            $database_configs['connections'][$database_configs['default']]['database'] = $database_url_path;
+        }
 
         foreach (['host', 'port', 'username', 'password'] as $k) {
-            $database_configs['connections'][$database_configs['default']][$k] = $database_url_[substr($k, 0, 4)];
+            if (array_key_exists($k, $database_configs['connections'][$database_configs['default']])) {
+                $k_ = substr($k, 0, 4);
+
+                if (array_key_exists($k_, $database_url_)) {
+                    $database_configs['connections'][$database_configs['default']][$k] = $database_url_[$k_];
+                }
+            }
         }
     }
 }
