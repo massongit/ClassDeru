@@ -22,8 +22,8 @@ https://classderu.herokuapp.com/
 
 ## How to develop
 1. Install [Git](https://git-scm.com/downloads), [Docker CE](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/)
-1. Run `mkdir {Any directory name}` (Make root directory)
-1. Run `cd {Any directory name}` (Move the working directory)
+1. Run `mkdir hoge` (Make root directory)
+1. Run `cd hoge` (Move the working directory)
 1. Run `git clone https://github.com/kons16/ClassDeru` (Clone this repository)
 1. Run `git clone https://github.com/kons16/classderu_sub_laradock laradock` (Clone laradock repository)
 1. Run `cd laradock` (Move the working directory)
