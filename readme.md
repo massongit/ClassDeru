@@ -19,3 +19,14 @@ https://classderu.herokuapp.com/
 
 ## Deploy to Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+## How to develop
+1. Install [Git](https://git-scm.com/downloads), [Docker CE](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/)
+1. Run `mkdir {Any directory name}` (Make root directory)
+1. Run `cd {Any directory name}` (Move the working directory)
+1. Run `git clone https://github.com/kons16/ClassDeru` (Clone this repository)
+1. Run `git clone https://github.com/kons16/classderu_sub_laradock laradock` (Clone laradock repository)
+1. Run `cd laradock` (Move the working directory)
+1. Run `docker-compose up -d nginx postgres` (Build and start docker containers)
+1. Run `docker-compose exec workspace bash ClassDeru/setup.sh` (Setup the docker containers)
+1. Access to https://localhost/
