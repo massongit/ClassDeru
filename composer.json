@@ -43,20 +43,22 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@generate-env"
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate"
+            "@generate-key"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
-        "compile": [
-            "@php -r \"file_exists('.env') || copy('.env.heroku', '.env');\"",
-            "@php artisan key:generate",
+        "post-install-cmd": [
+            "@generate-env",
+            "@generate-key",
             "@php artisan migrate --seed --force"
-        ]
+        ],
+        "generate-env": "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+        "generate-key": "@php artisan key:generate"
     },
     "config": {
         "preferred-install": "dist",
