@@ -17,5 +17,5 @@ Kono Shinji
 ## URL
 https://classderu.herokuapp.com/  
 
-## Deploying to Heroku
+## Deploy to Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
