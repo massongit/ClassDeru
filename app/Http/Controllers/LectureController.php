@@ -210,16 +210,15 @@ class LectureController extends Controller
     /**
      * 大学内からのアクセスかどうかを判定
      * @param string $ip 判定対象のIPアドレス
-     * @param array $allow_ips 大学内のIPアドレスのサブネットマスク・IPアドレスのリスト
-     * @param array $deny_ips 大学内でないIPアドレスのサブネットマスク・IPアドレスのリスト
+     * @param array $ips_list サブネットマスク・IPアドレスのリスト
      * @return bool 大学内からのアクセスかどうか
      */
-    private function check_ip(string $ip, array $allow_ips, array $deny_ips)
+    private function check_ip(string $ip, array $ips_list)
     {
         // 大学内からのアクセスかどうか
         $in_university = true;
 
-        foreach (["allow" => $allow_ips, "deny" => $deny_ips] as $kind => $ips) {
+        foreach ($ips_list as $kind => $ips) {
             foreach ($ips as $ip_mask) {
                 $ip_mask_ = explode("/", $ip_mask);
 
@@ -255,10 +254,17 @@ class LectureController extends Controller
     {
         $user = Auth::user();
         $ip = getenv('HTTP_X_FORWARDED_FOR');
-        $allow_ips = explode(" ", Config::get('app.allow_ips'));
-        $deny_ips = explode(" ", Config::get('app.deny_ips'));
+        $ips_list = array();
 
-        if (self::check_ip($ip, $allow_ips, $deny_ips)) {
+        foreach (["allow", "deny"] as $kind) {
+            $ips = Config::get("app.${kind}_ips");
+
+            if ($ips != "") {
+                $ips_list[$kind] = explode(" ", $ips);
+            }
+        }
+
+        if (self::check_ip($ip, $ips_list)) {
             // 授業のパスワードを取得
             $pass = \DB::table('lectures')->where('id', $lecture)->value('lecpass');
 
