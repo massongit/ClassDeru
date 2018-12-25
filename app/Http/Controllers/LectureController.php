@@ -219,7 +219,7 @@ class LectureController extends Controller
     // 学生が出席をクリックしたとき
     public function clickUser(Request $request, $lecture) {
         $user = Auth::user();
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $ip = getenv('HTTP_X_FORWARDED_FOR');
         //$allow_ip = config('app.allow_ip'); //ローカルの場合
         //$d1_ip = config('app.deny1_ip');
         //$d2_ip = config('app.deny2_ip');
