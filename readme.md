@@ -32,5 +32,5 @@ https://classderu.herokuapp.com/
 1. Access to https://localhost/
 
 ## Environment variables
-* `ALLOW_IPS`: The subnet masks or IP addresses of the terminal that is allowed to attend
-* `DENY_IPS`: The subnet masks or IP addresses of the terminal that is denied to attend
+* `ALLOW_IPS`: The subnet masks or IP addresses of the terminal that is allowed to attend (ex `123.45.67.0/24 124.56.0.0/16 125.67.12.11`)
+* `DENY_IPS`: The subnet masks or IP addresses of the terminal that is denied to attend (ex. `123.45.67.0/24 124.56.0.0/16 125.67.12.11`)
