@@ -8,6 +8,7 @@ use App\Lecture;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 
 class LectureController extends Controller
@@ -195,42 +196,69 @@ class LectureController extends Controller
         }
     }
 
-    // IPアドレス判定
-    private function checkip(string $ip, string $ansip, string $d1, string $d2, string $d3)
+    /**
+     * サブネットマスクを取得
+     * @param string $ip IPアドレス
+     * @param int $mask ビット数
+     * @return int サブネットマスク
+     */
+    private function get_subnet_mask(string $ip, int $mask)
     {
-        list($accept_ip, $mask) = explode("/", $ansip);
-        list($deny_ip1, $m1) = explode("/", $d1);
-        list($deny_ip2, $m2) = explode("/", $d2);
-        list($deny_ip3, $m3) = explode("/", $d3);
+        return ip2long($ip) >> (32 - $mask);
+    }
 
-        $accept_long = ip2long($accept_ip) >> (32 - $mask);
-        $user_long = ip2long($ip) >> (32 - $mask);
+    /**
+     * 大学内からのアクセスかどうかを判定
+     * @param string $ip 判定対象のIPアドレス
+     * @param array $allow_ips 大学内のIPアドレスのサブネットマスク・IPアドレスのリスト
+     * @param array $deny_ips 大学内でないIPアドレスのサブネットマスク・IPアドレスのリスト
+     * @return bool 大学内からのアクセスかどうか
+     */
+    private function check_ip(string $ip, array $allow_ips, array $deny_ips)
+    {
+        // 大学内からのアクセスかどうか
+        $in_university = true;
 
-        $deny_long1 = ip2long($deny_ip1) >> (32 - $m1);
-        $user_long1 = ip2long($ip) >> (32 - $m1);
-        $deny_long2 = ip2long($deny_ip2) >> (32 - $m2);
-        $user_long2 = ip2long($ip) >> (32 - $m2);
-        $deny_long3 = ip2long($deny_ip3) >> (32 - $m3);
-        $user_long3 = ip2long($ip) >> (32 - $m3);
+        foreach (["allow" => $allow_ips, "deny" => $deny_ips] as $kind => $ips) {
+            foreach ($ips as $ip_mask) {
+                $ip_mask_ = explode("/", $ip_mask);
 
-        return $accept_long == $user_long and $deny_long1 != $user_long1 and $deny_long2 != $user_long2 and $deny_long3 != $user_long3;
+                if (count($ip_mask_) == 1) {
+                    $ip_mask_[] = 32;
+                }
+
+                $subnet_mask = $this->get_subnet_mask($ip, $ip_mask_[1]);
+                $subnet_mask_ = $this->get_subnet_mask($ip_mask_[0], $ip_mask_[1]);
+
+                switch ($kind) {
+                    case "allow":
+                        $in_university = $in_university && $subnet_mask == $subnet_mask_;
+                        break;
+                    case "deny":
+                        $in_university = $in_university && $subnet_mask != $subnet_mask_;
+                        break;
+                    default:
+                        break;
+                }
+
+                if (!$in_university) {
+                    return $in_university;
+                }
+            }
+        }
+
+        return $in_university;
     }
 
     // 学生が出席をクリックしたとき
     public function clickUser(Request $request, $lecture)
     {
         $user = Auth::user();
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        //$allow_ip = config('app.allow_ip'); //ローカルの場合
-        //$d1_ip = config('app.deny1_ip');
-        //$d2_ip = config('app.deny2_ip');
-        //$d3_ip = config('app.deny3_ip');
-        $allow_ip = getenv('ALLOW_IP');       //herokuから取得
-        $d1_ip = getenv('DENY1_IP');
-        $d2_ip = getenv('DENY1_IP');
-        $d3_ip = getenv('DENY1_IP');
+        $ip = getenv('HTTP_X_FORWARDED_FOR');
+        $allow_ips = explode(" ", Config::get('app.allow_ips'));
+        $deny_ips = explode(" ", Config::get('app.deny_ips'));
 
-        if (self::checkip($ip, $allow_ip, $d1_ip, $d2_ip, $d3_ip)) {
+        if (self::check_ip($ip, $allow_ips, $deny_ips)) {
             // 授業のパスワードを取得
             $pass = \DB::table('lectures')->where('id', $lecture)->value('lecpass');
 
