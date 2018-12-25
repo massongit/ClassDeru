@@ -30,3 +30,7 @@ https://classderu.herokuapp.com/
 1. Run `docker-compose up -d nginx postgres` (Build and start docker containers)
 1. Run `docker-compose exec workspace bash ClassDeru/setup.sh` (Setup the docker containers)
 1. Access to https://localhost/
+
+## Environment variables
+* `ALLOW_IPS`: The subnet masks or IP addresses of the terminal that is allowed to attend
+* `DENY_IPS`: The subnet masks or IP addresses of the terminal that is denied to attend
