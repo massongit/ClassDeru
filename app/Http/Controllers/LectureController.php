@@ -222,6 +222,7 @@ class LectureController extends Controller
             foreach ($ips as $ip_mask) {
                 $ip_mask_ = explode("/", $ip_mask);
 
+                // IPアドレスで指定した場合、32ビットのサブネットマスクを指定したものとして扱う
                 if (count($ip_mask_) == 1) {
                     $ip_mask_[] = 32;
                 }
