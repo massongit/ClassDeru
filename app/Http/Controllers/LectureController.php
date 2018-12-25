@@ -253,7 +253,7 @@ class LectureController extends Controller
     public function clickUser(Request $request, $lecture)
     {
         $user = Auth::user();
-        $ip = getenv('HTTP_X_FORWARDED_FOR');
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         $ips_list = array();
 
         foreach (["allow", "deny"] as $kind) {
