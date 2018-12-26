@@ -210,7 +210,7 @@ class LectureController extends Controller
     /**
      * 大学内からのアクセスかどうかを判定
      * @param string $ip 判定対象のIPアドレス
-     * @param array $ips_list サブネットマスク・IPアドレスのリスト
+     * @param array $ips_list サブネットマスク・IPアドレス・ドメインのリスト
      * @return bool 大学内からのアクセスかどうか
      */
     private function check_ip(string $ip, array $ips_list)
