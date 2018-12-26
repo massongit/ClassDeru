@@ -229,6 +229,7 @@ class LectureController extends Controller
                     $compare_ip = $ip_mask_[0];
 
                     if (preg_match("/[a-zA-Z]/", $compare_ip)) { // ドメインを指定したとき
+                        // 接続元の端末のドメインを取得
                         $access_ip = gethostbyaddr($ip);
 
                         // 接続元の端末のドメインが取得できなかった場合はスキップ
