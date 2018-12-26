@@ -265,6 +265,11 @@ class LectureController extends Controller
     {
         $user = Auth::user();
         $ip = getenv('HTTP_X_FORWARDED_FOR');
+
+        if (!$ip) {
+            $ip = getenv('REMOTE_ADDR');
+        }
+
         $ips_list = array();
 
         foreach (["allow", "deny"] as $kind) {
