@@ -226,8 +226,18 @@ class LectureController extends Controller
                     $access_ip = $this->get_subnet_mask($ip, $ip_mask_[1]);
                     $compare_ip = $this->get_subnet_mask($ip_mask_[0], $ip_mask_[1]);
                 } else { // IPアドレスやドメインを指定したとき
-                    $access_ip = $ip;
                     $compare_ip = $ip_mask_[0];
+
+                    if (preg_match("/[a-zA-Z]/", $compare_ip)) { // ドメインを指定したとき
+                        $access_ip = gethostbyaddr($ip);
+
+                        // 接続元の端末のドメインが取得できなかった場合はスキップ
+                        if ($access_ip == $ip) {
+                            continue;
+                        }
+                    } else { // IPアドレスを指定したとき
+                        $access_ip = $ip;
+                    }
                 }
 
                 switch ($kind) {
