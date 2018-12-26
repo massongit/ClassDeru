@@ -222,20 +222,20 @@ class LectureController extends Controller
             foreach ($ips as $ip_mask) {
                 $ip_mask_ = explode("/", $ip_mask);
 
-                // IPアドレスで指定した場合、32ビットのサブネットマスクを指定したものとして扱う
-                if (count($ip_mask_) == 1) {
-                    $ip_mask_[] = 32;
+                if (count($ip_mask_) == 2) { // サブネットマスクを指定したとき
+                    $access_ip = $this->get_subnet_mask($ip, $ip_mask_[1]);
+                    $compare_ip = $this->get_subnet_mask($ip_mask_[0], $ip_mask_[1]);
+                } else { // IPアドレスやドメインを指定したとき
+                    $access_ip = $ip;
+                    $compare_ip = $ip_mask_[0];
                 }
-
-                $subnet_mask = $this->get_subnet_mask($ip, $ip_mask_[1]);
-                $subnet_mask_ = $this->get_subnet_mask($ip_mask_[0], $ip_mask_[1]);
 
                 switch ($kind) {
                     case "allow":
-                        $in_university = $in_university && $subnet_mask == $subnet_mask_;
+                        $in_university = $in_university && $access_ip == $compare_ip;
                         break;
                     case "deny":
-                        $in_university = $in_university && $subnet_mask != $subnet_mask_;
+                        $in_university = $in_university && $access_ip != $compare_ip;
                         break;
                     default:
                         break;
@@ -258,10 +258,10 @@ class LectureController extends Controller
         $ips_list = array();
 
         foreach (["allow", "deny"] as $kind) {
-            $ips = Config::get("app.${kind}_ips");
+            $ips = array_filter(explode(" ", Config::get("app.${kind}_ips")), 'strlen');
 
-            if ($ips != "") {
-                $ips_list[$kind] = explode(" ", $ips);
+            if (!empty($ips)) {
+                $ips_list[$kind] = $ips;
             }
         }
 
