@@ -210,13 +210,20 @@ class LectureController extends Controller
     /**
      * 大学内からのアクセスかどうかを判定
      * @param string $ip 判定対象のIPアドレス
-     * @param array $ips_list サブネットマスク・IPアドレス・ドメインのリスト
+     * @param array $ips_list サブネットマスク・IPアドレス・ホスト名のリスト
      * @return bool 大学内からのアクセスかどうか
      */
     private function check_ip(string $ip, array $ips_list)
     {
         // 大学内からのアクセスかどうか
         $in_university = true;
+
+        // 接続元の端末のホスト名
+        $access_host = gethostbyaddr($ip);
+
+        if ($access_host == $ip) {
+            $access_host = false;
+        }
 
         foreach ($ips_list as $kind => $ips) {
             foreach ($ips as $ip_mask) {
@@ -225,19 +232,15 @@ class LectureController extends Controller
                 if (count($ip_mask_) == 2) { // サブネットマスクを指定したとき
                     $access_ip = $this->get_subnet_mask($ip, $ip_mask_[1]);
                     $compare_ip = $this->get_subnet_mask($ip_mask_[0], $ip_mask_[1]);
-                } else { // IPアドレスやドメインを指定したとき
+                } else { // IPアドレスやホスト名を指定したとき
                     $compare_ip = $ip_mask_[0];
 
-                    if (preg_match("/[a-zA-Z]/", $compare_ip)) { // ドメインを指定したとき
-                        // 接続元の端末のドメインを取得
-                        $access_ip = gethostbyaddr($ip);
-
-                        // 接続元の端末のドメインが取得できなかった場合はスキップ
-                        if ($access_ip == $ip) {
-                            continue;
-                        }
-                    } else { // IPアドレスを指定したとき
+                    if (!preg_match("/[a-zA-Z]/", $compare_ip)) { // IPアドレスを指定したとき
                         $access_ip = $ip;
+                    } else if ($access_host) { // ホスト名が指定され、接続元の端末のホスト名がわかるとき
+                        $access_ip = $access_host;
+                    } else { // ホスト名が指定されたが、接続元の端末のホスト名がわからないとき
+                        continue;
                     }
                 }
 
